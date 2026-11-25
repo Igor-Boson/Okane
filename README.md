@@ -8,7 +8,7 @@ App pessoal de finanças feito pra **sentir cada gasto na hora em que ele aconte
 |---|---|---|
 | 1 | [Propósito, princípios e escopo](docs/01-proposito-principios-escopo.md) | ✅ aprovado |
 | 2 | [Features do MVP](docs/02-features-mvp.md) | ✅ aprovado |
-| 3 | Arquitetura | ⏳ |
+| 3 | [Arquitetura](docs/03-arquitetura.md) | 🟡 em revisão |
 | 4 | Implementação | ⏳ |
 
 ## Protótipo e arte
