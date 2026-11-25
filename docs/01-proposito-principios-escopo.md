@@ -1,6 +1,6 @@
 # Okane — Propósito, Princípios e Escopo
 
-> **Status:** 🟡 Rascunho v0.1, esperando green light
+> **Status:** 🟡 Rascunho v0.2 (decisões D1–D10 respondidas), esperando green light no resto
 > **Etapa:** 1 de 4 (**Propósito + Princípios + Escopo** → Features → Arquitetura → Implementação)
 > **Data:** 25/11/2026
 
@@ -28,7 +28,7 @@ O que você não responder continua como **proposta**, não como decisão. Depoi
 | 6. Conceito do pet | PET | 🟡 proposta |
 | 7. Jornadas | J1 a J5 | 🟡 proposta |
 | 8. Escopo | E1 a E4 | 🟡 proposta |
-| 10. Decisões em aberto | D1 a D10 | ⏳ **preciso de respostas** |
+| 10. Decisões | D1 a D11 | ✅ D1–D8, D10 · ⏳ D9 (reformulada), D11 (nova) |
 
 ---
 
@@ -215,8 +215,11 @@ Dados financeiros pessoais ficam sob seu controle e podem ser exportados (CSV/JS
 
 ### E1: Premissas
 
-- **Usuário único:** você.
-- **Brasil:** R$, Pix, débito e crédito com fatura e **parcelamento**. Parcelado é o gasto mais invisível que existe: R$ 1.200 em 10x "parece" R$ 120.
+- **Usuário único:** você (D10).
+- **iPhone + PWA** (D1): o app é instalado pela opção "Adicionar à Tela de Início" do Safari. A etapa 3 confirma a escolha e valida as limitações do PWA no iOS.
+- **Pagamento:** quase tudo é **débito ou Pix**, com algumas **parcelas em aberto** (D2). Fatura de cartão não é prioridade. As parcelas importam porque são o gasto mais invisível que existe: R$ 1.200 em 10x "parece" R$ 120.
+- **Renda fixa mensal** (D3).
+- **Só gastos** (D4): a renda é planejada, mas o saldo das contas não é acompanhado.
 - **Celular primeiro:** o registro acontece na rua, no celular.
 - **Custo de operação perto de zero:** é um projeto pessoal.
 - **Funciona offline.**
@@ -226,15 +229,17 @@ Dados financeiros pessoais ficam sob seu controle e podem ser exportados (CSV/JS
 **O número do dia**, recalculado todo dia:
 
 ```
-livre no mês = renda do mês − gastos fixos − meta de guardar
+livre no mês = renda do mês − gastos fixos − parcelas do mês − meta de guardar
 pode hoje    = (livre no mês − já gasto no mês) ÷ dias que faltam
 ```
+
+- Como a renda é fixa (D3), o número **já funciona desde o primeiro dia**, sem precisar chutar nada. O único chute é a meta de guardar (ver D9).
 
 - Gastou pouco hoje? Amanhã o número sobe, porque a folga acumula. Gastou muito? O número cai, mas **o app nunca te trava**: ele só mostra.
 - **Status:** 🟢 gastando abaixo do ritmo do mês / 🟡 perto / 🔴 acima.
 - **Gastos fixos** (aluguel, luz, assinaturas) são planejados uma vez e não pedem reflexão.
 - **Limite por categoria:** opcional, fica pra depois.
-- **Mês 0 de observação:** no primeiro mês você só registra, sem meta, pra descobrir quanto gasta de verdade (ver D9).
+- **Primeiro mês com meta de guardar = 0** (proposta, ver D9): você vê quanto sobra de verdade e só então define quanto quer guardar.
 
 *(As fórmulas exatas ficam pra etapa de implementação. Aqui o que conta é o modelo mental.)*
 
@@ -247,31 +252,32 @@ Objetivo: validar o ciclo central **registrar → sentir → ajustar** com o mí
 - Atalhos de gastos frequentes (1 toque)
 - Categorias editáveis, poucas, com emoji
 - Planejamento do mês: renda, gastos fixos, meta de guardar
+- **Parcelas em aberto como compromissos:** valor da parcela + quantas faltam, descontadas automaticamente a cada mês (D2)
 - Número do dia + status 🟢🟡🔴
 - Micro-reflexão depois de registrar (impacto no dia)
 - Lista de gastos do dia e do mês, com edição e exclusão
-- Pet v0: fome + humor, poucos estados, nunca morre
+- Pet v0 (D6): fome + humor, poucos estados, nunca morre, **fala com personalidade e tem tom alternável** (D7)
 - Sequência de dias registrados, com perdão
 - Funciona offline; exporta CSV
 
 #### 🥈 v1: completo pra realidade brasileira
 
-- Cartão de crédito: fatura, data de fechamento, parcelamento (parcelas futuras aparecem como "dinheiro já comprometido")
-- Forma de pagamento (Pix, débito, crédito) em 1 toque, lembrando a última usada
+- Registrar uma compra parcelada nova: a reflexão mostra o **valor total**, e o orçamento conta a parcela do mês (D5)
 - Revisão semanal "valeu a pena?" + relatório do que "não valeu" (J4)
 - Lembrete de fechamento do dia (J3)
 - Ritual mensal com perguntas (J5)
 - Conferência com a fatura/extrato (marcar o que ficou faltando)
 - **Lista de desejos com quarentena:** quer algo não essencial? Coloca na lista. Se depois de X dias ainda quiser, compra sem culpa.
+- **Metas de compra** (D8): um item da lista de desejos vira meta (ex.: "comprar a roupa X"), com quanto falta guardar e quando dá pra comprar.
 - Custo em horas de trabalho (opcional)
 - Pet v1: evolução, itens, reações mais ricas
 
 #### 🥉 Depois (talvez; só entra se o uso pedir)
 
 - Registro por texto livre ou voz ("sorvete 20") com IA
-- Integração com Atalhos/Wallet no iPhone ou leitura de notificações no Android
+- Integração com Atalhos/Wallet no iPhone. Ela **só pega pagamento por aproximação (Apple Pay)**, não Pix. Num PWA, provavelmente precisaria de um backendzinho: o Atalho envia o gasto e ele aparece pra revisão quando você abre o app.
 - Importar extrato (OFX/CSV) pra conferir automaticamente
-- Metas de poupança com progresso (ex.: viagem)
+- Cartão de crédito com fatura e data de fechamento (só se você passar a usar crédito)
 - Limite por categoria
 - Insights automáticos ("você gasta 40% a mais com delivery às sextas")
 - Widget na tela inicial / no relógio
@@ -300,32 +306,40 @@ Objetivo: validar o ciclo central **registrar → sentir → ajustar** com o mí
 | A reflexão virar ruído (você para de ler) | Média | Variar as mensagens, mostrar só em gasto relevante, 1 toque |
 | A culpa te fazer evitar o app | Média | P6, pet nunca morre, número recalcula sem bronca |
 | Inchar e virar um Mobills | **Alta** (dev empolgado 😅) | Lista de não-objetivos (E4) + P7 |
-| Orçamento irreal no começo | Média | Mês 0 só de observação (D9) |
+| Meta de guardar irreal no começo | Média | Primeiro mês com meta = 0 (D9) |
+| Limitações do PWA no iOS (notificação, armazenamento local) | Média | Validar na etapa 3; backup/exportação desde o MVP (P8) |
 
 ---
 
-## 10. Decisões em aberto (preciso de você)
+## 10. Decisões
 
-| ID | Pergunta | Minha recomendação / por que importa |
-|---|---|---|
-| **D1** | iPhone ou Android? | Define se dá pra usar Atalhos + Wallet (iOS) ou ler notificações do banco (Android), e pesa na escolha de tecnologia |
-| **D2** | Como você paga a maioria das coisas: crédito, débito, Pix ou dinheiro? Parcela muito? | Se crédito e parcelado forem a maior parte, cartão sobe pro MVP |
-| **D3** | Sua renda é fixa por mês ou varia? | Muda como calculamos o "livre no mês" |
-| **D4** | Registrar só gastos, ou também saldo das contas? | **Só gastos** + renda planejada. Saldo é assunto de outro app |
-| **D5** | Como pesa uma compra parcelada? (a) valor total na hora (b) uma parcela por mês | **As duas:** a reflexão mostra o total (pra doer), o orçamento conta a parcela do mês e as próximas aparecem como "comprometidas" |
-| **D6** | O pet entra no MVP? | **Sim, numa versão simples.** Abandono é o maior risco, e o pet é a principal arma contra ele. Mas sem passar semanas fazendo arte |
-| **D7** | Tom do pet: fofo (Finch), sarcástico (Cleo) ou dá pra alternar? | Fofo por padrão + modo "sem filtro" opcional |
-| **D8** | Tem alguma meta concreta? (guardar R$ X por mês, quitar dívida, viagem) | Se tiver, ela entra no ritual mensal |
-| **D9** | Primeiro mês só observando, sem meta, pra calibrar? | **Sim.** Orçamento chutado gera 🔴 o tempo todo e desanima |
-| **D10** | Mais alguém vai usar (parceiro(a), dividir contas)? | Por enquanto, não |
+| ID | Pergunta | Decisão | O que muda |
+|---|---|---|---|
+| **D1** | iPhone ou Android? | ✅ **iPhone, PWA** (melhor custo-benefício) | Sem App Store. A integração com a Wallet fica pra depois e passaria por um backend |
+| **D2** | Como você paga? Parcela muito? | ✅ **Débito/Pix**, com algumas parcelas em aberto | Fatura de cartão sai da v1. **Parcelas em aberto entram no MVP** como compromissos mensais |
+| **D3** | Renda fixa ou variável? | ✅ **Fixa** | O número do dia funciona desde o dia 1 |
+| **D4** | Só gastos ou também saldo? | ✅ **Só gastos** + renda planejada | Nada de bater saldo com o banco |
+| **D5** | Como pesa uma compra parcelada? | ✅ **Reflexão mostra o total; orçamento conta a parcela** | Parcelas futuras aparecem como "comprometidas" |
+| **D6** | Pet no MVP? | ✅ **Sim**, versão simples | Pet v0 no MVP |
+| **D7** | Tom do pet | ✅ **Com personalidade, alternável** | Dois tons (ex.: fofo / sem filtro) desde o MVP |
+| **D8** | Meta concreta? | ✅ **Mais pra frente**, metas de compra (ex.: "roupa X") | Metas de compra na v1, ligadas à lista de desejos |
+| **D9** | ~~Primeiro mês só observando?~~ Reformulada abaixo | ⏳ | |
+| **D10** | Mais alguém vai usar? | ✅ **Não** | Usuário único |
+| **D11** | Em que dia cai seu salário? | ⏳ **nova** | Proposta: o "mês" do Okane vai **de um pagamento ao próximo**, não do dia 1 ao dia 30 |
+
+### D9 reformulada
+
+Como a renda é fixa, o número do dia já sai certo desde o começo: `renda − fixos − parcelas − meta de guardar`, dividido pelos dias. O único valor chutado é a **meta de guardar**. Se você chutar R$ 800 e na real só sobrarem R$ 300, o app fica 🔴 o mês inteiro e você desanima.
+
+**Proposta:** no primeiro mês, meta de guardar = R$ 0. O número do dia mostra só "renda − fixos − parcelas". No fim do mês o app mostra quanto sobrou de verdade, e **aí** você define a meta pro mês seguinte com base no real.
 
 ---
 
 ## 11. Próximos passos
 
-1. **Você:** green light ou ajustes em PR, P, PET, J, E e respostas pras D.
+1. **Você:** green light ou ajustes em PR, P, PET, J e E, além de responder D9 e D11.
 2. **Etapa 2 (Features):** detalhar o MVP: fluxos, rascunho das telas, regras do pet e do orçamento.
-3. **Etapa 3 (Arquitetura):** stack e infraestrutura. Spoiler: provavelmente um PWA offline-first, mas isso só se decide depois do D1.
+3. **Etapa 3 (Arquitetura):** stack e infraestrutura de um PWA offline-first (D1), validando as limitações do iOS.
 4. **Etapa 4:** implementação.
 
 ---
