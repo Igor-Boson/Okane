@@ -133,7 +133,7 @@
   .linha1 { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; }
   .linha1 .d { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .linha2 { display: grid; grid-template-columns: auto 1fr auto auto; gap: 6px; align-items: center; }
-  .sel { height: 34px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); padding: 0 6px; min-width: 0; font-size: 14px; }
+  .sel { height: 34px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); padding: 0 6px; min-width: 0; font-size: 16px; }
   .mini { height: 34px; padding: 0 10px; border-radius: 10px; background: var(--surface-2); font-weight: 600; font-size: 13px; }
   .mini.ouro { background: var(--gold-fill); color: #2A1E00; }
   .fixos summary { cursor: pointer; font-weight: 600; color: var(--muted); padding: 8px 0; }

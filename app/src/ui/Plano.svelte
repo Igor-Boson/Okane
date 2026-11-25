@@ -163,7 +163,7 @@
   .nav-mes button:disabled { opacity: .25; }
   .primeiro { border-top: 0; }
   .direita { display: flex; align-items: center; gap: 4px; }
-  .nome-in { flex: 1; min-width: 0; border: 0; background: transparent; font-size: 15px; padding: 6px 0; }
+  .nome-in { flex: 1; min-width: 0; border: 0; background: transparent; font-size: 16px; padding: 6px 0; }
   .nome-in:focus { outline: none; }
   .nome-in::placeholder { color: var(--gold); font-weight: 600; }
   .x { width: 32px; height: 32px; border-radius: 10px; color: var(--muted); font-size: 20px; }

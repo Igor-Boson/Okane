@@ -92,7 +92,7 @@
   .q p { color: var(--muted); font-size: 14px; }
   .n { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 99px; background: var(--gold-soft); color: var(--gold); font-weight: 800; font-size: 13px; display: grid; place-items: center; font-family: var(--f-display); }
   .cresce { flex: 1; display: grid; gap: 6px; }
-  .area { height: auto; padding: 10px 12px; resize: none; font-size: 15px; }
+  .area { height: auto; padding: 10px 12px; resize: none; font-size: 16px; }
   .conferir { text-align: left; }
   .cartao-meta { background: var(--gold-soft); border-radius: 16px; padding: 12px; display: grid; gap: 10px; }
 </style>

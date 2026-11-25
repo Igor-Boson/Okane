@@ -303,7 +303,7 @@
   .cats { display: grid; gap: 6px; }
   .cat { display: grid; grid-template-columns: 40px 1fr auto 30px 30px 30px; gap: 4px; align-items: center; }
   .cat.arquivada { opacity: .45; }
-  .cat input { height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 0 8px; min-width: 0; font-size: 15px; }
+  .cat input { height: 38px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 0 8px; min-width: 0; font-size: 16px; }
   .cat .emoji { text-align: center; padding: 0; }
   .mini { height: 32px; padding: 0 10px; border-radius: 10px; background: var(--surface-2); font-weight: 600; font-size: 12px; white-space: nowrap; }
   .mini.ativo { background: var(--ok-soft); color: var(--ok); }
