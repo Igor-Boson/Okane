@@ -1,6 +1,6 @@
 # Okane — Propósito, Princípios e Escopo
 
-> **Status:** 🟡 Rascunho v0.2 (decisões D1–D10 respondidas), esperando green light no resto
+> **Status:** ✅ **Aprovado** (v1.0)
 > **Etapa:** 1 de 4 (**Propósito + Princípios + Escopo** → Features → Arquitetura → Implementação)
 > **Data:** 25/11/2026
 
@@ -22,13 +22,13 @@ O que você não responder continua como **proposta**, não como decisão. Depoi
 
 | Bloco | Itens | Status |
 |---|---|---|
-| 2. Propósito | PR-1 a PR-4 | 🟡 proposta |
-| 3. A tensão do atrito | (conceito) | 🟡 proposta |
-| 4. Princípios | P1 a P8 | 🟡 proposta |
-| 6. Conceito do pet | PET | 🟡 proposta |
-| 7. Jornadas | J1 a J5 | 🟡 proposta |
-| 8. Escopo | E1 a E4 | 🟡 proposta |
-| 10. Decisões | D1 a D11 | ✅ D1–D8, D10 · ⏳ D9 (reformulada), D11 (nova) |
+| 2. Propósito | PR-1 a PR-4 | ✅ aprovado |
+| 3. A tensão do atrito | (conceito) | ✅ aprovado |
+| 4. Princípios | P1 a P8 | ✅ aprovado |
+| 6. Conceito do pet | PET | ✅ aprovado |
+| 7. Jornadas | J1 a J5 | ✅ aprovado |
+| 8. Escopo | E1 a E4 | ✅ aprovado |
+| 10. Decisões | D1 a D12 | ✅ todas respondidas |
 
 ---
 
@@ -39,7 +39,7 @@ O Okane é um app pessoal de gastos que **faz cada gasto pesar na hora em que el
 Três ideias sustentam o app:
 
 1. **Atrito mecânico perto de zero, atrito reflexivo de propósito.** Registrar precisa ser rápido (valor → salvar, uns 5 segundos). Em troca, o app te dá um momento curto de consciência: quanto aquilo pesa no seu dia e se valeu a pena.
-2. **Um número responde "tô bem?":** quanto você ainda pode gastar hoje, com 🟢 / 🟡 / 🔴.
+2. **Um número responde "tô bem?":** quanto você ainda pode gastar **nesta semana**, com 🟢 / 🟡 / 🔴.
 3. **Um bichinho que vive de você registrar, não de você gastar pouco.** Ser honesto alimenta o pet. O orçamento só mexe no humor dele.
 
 ---
@@ -104,7 +104,7 @@ Você pediu duas coisas que parecem opostas: **menos atrito** pra registrar e **
 | **O que é** | Esforço que não acrescenta nada: digitar, navegar, escolher entre 30 categorias, preencher data | Um momento curto de pensar: "quanto isso pesa?", "valeu a pena?" |
 | **O que causa** | Cansa, e você para de registrar | Gera consciência e muda comportamento |
 | **Estratégia** | **Eliminar** (meta: perto de zero) | **Dosar** (curto, relevante, nunca chato) |
-| **Exemplo** | Valor primeiro, categoria sugerida, atalho "☕ Café R$ 8" | "Esse sorvete = 40% do teu dia" / "Valeu a pena? 👍 👎" |
+| **Exemplo** | Valor primeiro, categoria sugerida, atalho "☕ Café R$ 8" | "Esse sorvete = 10% da tua semana" / "Valeu a pena? 👍 👎" |
 
 **Regras do atrito reflexivo:**
 
@@ -126,7 +126,7 @@ Fluxo padrão: abrir → digitar valor → (descrição opcional) → salvar. A 
 
 ### P2: Atrito reflexivo curto e de propósito
 Todo gasto relevante vem com um **micromomento de consciência** (no máximo 1 toque, e dá pra pular).
-- ✔️ Mostrar o impacto ("sobram R$ 23 hoje"), perguntar se valeu a pena, mostrar o custo em horas de trabalho.
+- ✔️ Mostrar o impacto ("sobram R$ 230 nesta semana"), perguntar se valeu a pena, mostrar o custo em horas de trabalho.
 - ✖️ Questionário, sermão, bloqueio, confirmação dupla.
 
 ### P3: Honestidade acima de desempenho
@@ -136,8 +136,8 @@ O app **sempre recompensa registrar**, inclusive gasto alto. Gastar demais é in
 - ✖️ Punir por registrar, pet que morre, perder progresso pra sempre.
 
 ### P4: Uma resposta, não um relatório
-A pergunta "tô bem?" se responde em **1 segundo de olhada**: quanto ainda dá pra gastar hoje, mais uma cor (🟢 folga / 🟡 no limite / 🔴 passou).
-- ✔️ Tela inicial = número do dia + status. Gráficos ficam em segundo plano, pra quando você quiser.
+A pergunta "tô bem?" se responde em **1 segundo de olhada**: quanto ainda dá pra gastar nesta semana, mais uma cor (🟢 folga / 🟡 no limite / 🔴 passou).
+- ✔️ Tela inicial = número da semana + status. Gráficos ficam em segundo plano, pra quando você quiser.
 - ✖️ Dashboard com 8 gráficos logo na abertura.
 
 ### P5: Categorias suas, e poucas
@@ -164,7 +164,7 @@ Dados financeiros pessoais ficam sob seu controle e podem ser exportados (CSV/JS
 |---|---|---|---|
 | **Kakeibo** (método japonês de 1904, num caderno à mão) | Registrar à mão vira um ato de consciência. Categorias por **intenção**: necessidade, desejo, cultura, imprevisto. Quatro perguntas por mês: *quanto tenho? quanto quero guardar? quanto estou gastando? como posso melhorar?* | Ritual mensal com perguntas; separar necessidade de desejo | Ser todo manual e trabalhoso |
 | **YNAB** | "Dê um trabalho a cada real"; foco em "quanto ainda tenho disponível"; transforma gastos anuais em mensais | Planejar o mês antes de gastar; reservar dinheiro pros gastos irregulares | Curva de aprendizado altíssima; orçamento base zero é pesado demais pra gente |
-| **PocketGuard** | Um número: quanto sobra pra gastar | O número do dia (P4) | Depender de conexão com o banco |
+| **PocketGuard** | Um número: quanto sobra pra gastar | O número da semana (P4) | Depender de conexão com o banco |
 | **Monefy / Money Manager** | Registro rapidíssimo: abre, digita o valor, toca no ícone, pronto | O fluxo de registro (P1) | Visual datado; quase nenhuma reflexão |
 | **Fortune City** | Cada registro constrói uma cidade. Ganhou Red Dot e "Best App" no Google Play ([Sparkful][fc]) | Recompensa por **registrar** | Reviews dizem que o app foca mais em construir a cidade que em ensinar sobre dinheiro ([YourStory][fc-review]). O jogo não pode virar o objetivo |
 | **Finch** (pet de autocuidado) | O pet cresce conforme você cumpre metas. Tom gentil, sem ranking nem pressão ([Engadget][finch]) | Personalidade e tom do pet; progresso que se acumula | Customização demais vira distração |
@@ -203,11 +203,11 @@ Dados financeiros pessoais ficam sob seu controle e podem ser exportados (CSV/JS
 
 | ID | Momento | O que acontece | Tempo |
 |---|---|---|---|
-| **J1** | **Antes de comprar** (opcional) | Abre e vê "você pode gastar R$ 47 hoje", e decide com isso na cabeça | 2 s |
+| **J1** | **Antes de comprar** (opcional) | Abre e vê "você ainda pode gastar R$ 230 nesta semana", e decide com isso na cabeça | 2 s |
 | **J2** | **Na hora ou logo depois** | Registra o valor (+ descrição), vê o impacto e responde "valeu a pena?" se quiser | 5–10 s |
 | **J3** | **Fim do dia** | Pet + resumo do dia + "esqueceu algum gasto?" | 30 s |
 | **J4** | **Fim da semana** | Revisão "valeu a pena?" dos gastos não essenciais da semana | 2 min |
-| **J5** | **Virada do mês** | Ritual: renda do mês, gastos fixos e quanto quer guardar definem o número diário. Reflexão do mês que passou (perguntas do Kakeibo) e conferência com a fatura | 10 min |
+| **J5** | **Virada do mês** | Ritual: renda do mês, gastos fixos e quanto quer guardar definem o número da semana. Reflexão do mês que passou (perguntas do Kakeibo) e conferência com a fatura | 10 min |
 
 ---
 
@@ -224,22 +224,26 @@ Dados financeiros pessoais ficam sob seu controle e podem ser exportados (CSV/JS
 - **Custo de operação perto de zero:** é um projeto pessoal.
 - **Funciona offline.**
 
-### E2: Modelo de orçamento (proposta)
+### E2: Modelo de orçamento
 
-**O número do dia**, recalculado todo dia:
+**O número da semana** (D12), recalculado a cada gasto:
 
 ```
-livre no mês = renda do mês − gastos fixos − parcelas do mês − meta de guardar
-pode hoje    = (livre no mês − já gasto no mês) ÷ dias que faltam
+livre no mês      = renda − gastos fixos − parcelas do mês − meta de guardar
+cota da semana    = (livre no mês − gasto até a semana passada) × (dias desta semana ÷ dias que faltam no mês)
+pode nesta semana = cota da semana − gasto nesta semana
 ```
 
+- **Mês = mês do calendário** (D11): o salário cai por volta do dia 1.
+- **Semana de segunda a domingo.** A semana cortada pela virada do mês ganha uma cota proporcional aos dias dela.
+- **Folga e estouro passam pra frente:** gastou pouco numa semana, as próximas ganham mais; estourou, as próximas ficam mais apertadas. Isso sai de graça porque tudo vem do mesmo "livre no mês".
+- **Número secundário, menor:** "≈ R$ X por dia até domingo", pra ajudar a dosar o ritmo dentro da semana.
 - Como a renda é fixa (D3), o número **já funciona desde o primeiro dia**, sem precisar chutar nada. O único chute é a meta de guardar (ver D9).
-
-- Gastou pouco hoje? Amanhã o número sobe, porque a folga acumula. Gastou muito? O número cai, mas **o app nunca te trava**: ele só mostra.
-- **Status:** 🟢 gastando abaixo do ritmo do mês / 🟡 perto / 🔴 acima.
+- O número cai quando você gasta muito, mas **o app nunca te trava**: ele só mostra.
+- **Status:** 🟢 gastando abaixo do ritmo da semana / 🟡 perto / 🔴 acima.
 - **Gastos fixos** (aluguel, luz, assinaturas) são planejados uma vez e não pedem reflexão.
 - **Limite por categoria:** opcional, fica pra depois.
-- **Primeiro mês com meta de guardar = 0** (proposta, ver D9): você vê quanto sobra de verdade e só então define quanto quer guardar.
+- **Primeiro mês com meta de guardar = 0** (D9): você vê quanto sobra de verdade e só então define quanto quer guardar.
 
 *(As fórmulas exatas ficam pra etapa de implementação. Aqui o que conta é o modelo mental.)*
 
@@ -253,9 +257,9 @@ Objetivo: validar o ciclo central **registrar → sentir → ajustar** com o mí
 - Categorias editáveis, poucas, com emoji
 - Planejamento do mês: renda, gastos fixos, meta de guardar
 - **Parcelas em aberto como compromissos:** valor da parcela + quantas faltam, descontadas automaticamente a cada mês (D2)
-- Número do dia + status 🟢🟡🔴
-- Micro-reflexão depois de registrar (impacto no dia)
-- Lista de gastos do dia e do mês, com edição e exclusão
+- Número da semana + status 🟢🟡🔴
+- Micro-reflexão depois de registrar (impacto na semana)
+- Lista de gastos da semana e do mês, com edição e exclusão
 - Pet v0 (D6): fome + humor, poucos estados, nunca morre, **fala com personalidade e tem tom alternável** (D7)
 - Sequência de dias registrados, com perdão
 - Funciona offline; exporta CSV
@@ -317,27 +321,28 @@ Objetivo: validar o ciclo central **registrar → sentir → ajustar** com o mí
 |---|---|---|---|
 | **D1** | iPhone ou Android? | ✅ **iPhone, PWA** (melhor custo-benefício) | Sem App Store. A integração com a Wallet fica pra depois e passaria por um backend |
 | **D2** | Como você paga? Parcela muito? | ✅ **Débito/Pix**, com algumas parcelas em aberto | Fatura de cartão sai da v1. **Parcelas em aberto entram no MVP** como compromissos mensais |
-| **D3** | Renda fixa ou variável? | ✅ **Fixa** | O número do dia funciona desde o dia 1 |
+| **D3** | Renda fixa ou variável? | ✅ **Fixa** | O número da semana funciona desde o dia 1 |
 | **D4** | Só gastos ou também saldo? | ✅ **Só gastos** + renda planejada | Nada de bater saldo com o banco |
 | **D5** | Como pesa uma compra parcelada? | ✅ **Reflexão mostra o total; orçamento conta a parcela** | Parcelas futuras aparecem como "comprometidas" |
 | **D6** | Pet no MVP? | ✅ **Sim**, versão simples | Pet v0 no MVP |
 | **D7** | Tom do pet | ✅ **Com personalidade, alternável** | Dois tons (ex.: fofo / sem filtro) desde o MVP |
 | **D8** | Meta concreta? | ✅ **Mais pra frente**, metas de compra (ex.: "roupa X") | Metas de compra na v1, ligadas à lista de desejos |
-| **D9** | ~~Primeiro mês só observando?~~ Reformulada abaixo | ⏳ | |
+| **D9** | Meta de guardar no primeiro mês | ✅ **R$ 0 no primeiro mês**, depois define com base no real | Ver detalhe abaixo |
 | **D10** | Mais alguém vai usar? | ✅ **Não** | Usuário único |
-| **D11** | Em que dia cai seu salário? | ⏳ **nova** | Proposta: o "mês" do Okane vai **de um pagamento ao próximo**, não do dia 1 ao dia 30 |
+| **D11** | Em que dia cai seu salário? | ✅ **Por volta do dia 1** | O "mês" do Okane é o mês do calendário |
+| **D12** | Meta de gasto diária ou semanal? | ✅ **Semanal** (ideia sua) | O número principal é "pode gastar nesta semana"; o valor por dia aparece pequeno, como guia (E2) |
 
-### D9 reformulada
+### D9 em detalhe
 
-Como a renda é fixa, o número do dia já sai certo desde o começo: `renda − fixos − parcelas − meta de guardar`, dividido pelos dias. O único valor chutado é a **meta de guardar**. Se você chutar R$ 800 e na real só sobrarem R$ 300, o app fica 🔴 o mês inteiro e você desanima.
+Como a renda é fixa, o número já sai certo desde o começo: `renda − fixos − parcelas − meta de guardar`, dividido pelos dias. O único valor chutado é a **meta de guardar**. Se você chutar R$ 800 e na real só sobrarem R$ 300, o app fica 🔴 o mês inteiro e você desanima.
 
-**Proposta:** no primeiro mês, meta de guardar = R$ 0. O número do dia mostra só "renda − fixos − parcelas". No fim do mês o app mostra quanto sobrou de verdade, e **aí** você define a meta pro mês seguinte com base no real.
+**Decisão:** no primeiro mês, meta de guardar = R$ 0. O número da semana sai só de "renda − fixos − parcelas". No fim do mês o app mostra quanto sobrou de verdade, e **aí** você define a meta pro mês seguinte com base no real.
 
 ---
 
 ## 11. Próximos passos
 
-1. **Você:** green light ou ajustes em PR, P, PET, J e E, além de responder D9 e D11.
+1. ✅ **Etapa 1 aprovada.**
 2. **Etapa 2 (Features):** detalhar o MVP: fluxos, rascunho das telas, regras do pet e do orçamento.
 3. **Etapa 3 (Arquitetura):** stack e infraestrutura de um PWA offline-first (D1), validando as limitações do iOS.
 4. **Etapa 4:** implementação.

@@ -6,7 +6,7 @@ App pessoal de finanças feito pra **sentir cada gasto na hora em que ele aconte
 
 | Etapa | Documento | Status |
 |---|---|---|
-| 1 | [Propósito, princípios e escopo](docs/01-proposito-principios-escopo.md) | 🟡 em revisão |
+| 1 | [Propósito, princípios e escopo](docs/01-proposito-principios-escopo.md) | ✅ aprovado |
 | 2 | Features do MVP | ⏳ |
 | 3 | Arquitetura | ⏳ |
 | 4 | Implementação | ⏳ |
