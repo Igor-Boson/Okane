@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   calcularSemana, contaDoMes, cotaDoSegmento, fecharSemana, infoParcela, mediaSemanal, minutosDeTrabalho,
-  parcelasDoMes, parcelasTerminando, planoDoMes, resumoDoMes, segmentosDaSemana, semanasAbertas, sugerirMeta,
+  parcelasDoMes, parcelasTerminando, planoDoMes, reservaMensal, resumoDoMes, segmentosDaSemana, semanasAbertas, sugerirMeta,
   textoTempoDeTrabalho,
 } from './orcamento';
 import type { Dados, Gasto } from './tipos';
@@ -35,6 +35,17 @@ function cenario(extra: Partial<Dados> = {}): Dados {
 }
 
 describe('plano e parcelas', () => {
+  it('fixo pago a cada N meses reserva valor ÷ N por mês', () => {
+    expect(reservaMensal({ id: 'a', nome: 'Seguro', valor: 50000, cada: 2 })).toBe(25000);
+    expect(reservaMensal({ id: 'b', nome: 'IPVA', valor: 100000, cada: 3 })).toBe(33333);
+    expect(reservaMensal({ id: 'c', nome: 'Luz', valor: 18000 })).toBe(18000);
+    const d = cenario();
+    d.planos[0].fixos.push({ id: 'f3', nome: 'Bimestral', valor: 50000, cada: 2 });
+    const c = contaDoMes(d, '2026-11');
+    expect(c.fixos).toBe(230000 + 25000);
+    expect(c.livre).toBe(500000 - 255000 - 35000);
+  });
+
   it('herda o plano mais recente quando o mês não tem um', () => {
     const d = cenario();
     expect(planoDoMes(d, '2026-12')?.mes).toBe('2026-11');

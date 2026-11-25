@@ -148,7 +148,7 @@ class Estado {
   }
 
   async salvarPlano(p: PlanoMes) {
-    const limpo: PlanoMes = { mes: p.mes, salario: p.salario, metaGuardar: p.metaGuardar, fixos: p.fixos.map(f => ({ id: f.id, nome: f.nome, valor: f.valor })) };
+    const limpo: PlanoMes = { mes: p.mes, salario: p.salario, metaGuardar: p.metaGuardar, fixos: p.fixos.map(f => ({ id: f.id, nome: f.nome, valor: f.valor, ...(f.cada && f.cada > 1 ? { cada: f.cada } : {}) })) };
     await this.db.planos.put(limpo);
     this.planos = [...this.planos.filter(x => x.mes !== p.mes), limpo];
     this.mudou();

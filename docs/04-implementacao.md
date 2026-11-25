@@ -12,7 +12,7 @@
 - **O MVP inteiro está pronto** (M0 a M4), mais **várias features da v1** e uma da lista "depois" (conferência com extrato).
 - **Dá pra testar hoje, sem configurar nada:** a prévia acima roda o app de verdade. Na primeira tela, toque em **"Explorar com dados de exemplo"**.
 - **Pra usar de verdade** falta só você seguir o [guia de deploy](deploy.md) (conta grátis na Cloudflare, ~15 min) e instalar no iPhone.
-- **Qualidade:** 95 testes de unidade, 3 testes ponta a ponta, tipos sem erro e sem aviso, CI no GitHub Actions.
+- **Qualidade:** 96 testes de unidade, 3 testes ponta a ponta, tipos sem erro e sem aviso, CI no GitHub Actions.
 
 ---
 
@@ -68,6 +68,8 @@ Coisas que os documentos não cobriam e que tive que decidir pra implementar:
 | I9 | **Sugestão de meta** no fim do 1º mês: 75% da sobra real, arredondada pra baixo | Deixa folga pra variação |
 | I10 | **Backup:** espera 10 s depois de uma mudança (ou o app ir pro fundo); guarda o último + 1 cópia por dia por 8 dias | Pouca gravação, dá pra voltar uns dias |
 | I11 | **Nível 1** já no começo; sobe a cada 7 dias registrados | PET-R4 |
+| I12 | **Fixo que não é todo mês** (a cada 2, 3, 6 ou 12 meses): você põe o valor real (ex.: R$ 500) e o plano reserva o valor ÷ N todo mês (R$ 250) | A semana não oscila: o mês do pagamento não aperta e o mês sem pagamento não sobra dinheiro "de mentira". Na conferência com o extrato, o débito de R$ 500 cai em "prováveis fixos" |
+| I13 | **Altura da tela no iPhone:** a casca fica presa nas bordas da tela; se o iOS calcular a viewport sem a barra de status, o app mede e usa a altura da tela. O teclado encolhe as teclas (54 → 40 px) em tela baixa | Sobrava uma faixa embaixo das abas e a última linha do teclado ficava escondida |
 
 ---
 
@@ -93,7 +95,7 @@ prototype/            ← o protótipo clicável da etapa 2 (histórico)
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | Roda local em modo desenvolvimento |
-| `npm test` | 95 testes do motor de regras, cripto e servidor |
+| `npm test` | 96 testes do motor de regras, cripto e servidor |
 | `npm run check` | Tipos (app + Functions) |
 | `npm run build` | Build de produção (PWA) em `dist/` |
 | `npm run e2e` | Testes ponta a ponta (precisa do build) |
@@ -103,7 +105,7 @@ prototype/            ← o protótipo clicável da etapa 2 (histórico)
 
 ## 4. O que os testes cobrem
 
-- **Motor de regras (71 testes):** cota da semana, tolerância do status, folga e estouro passando pra frente, registro retroativo, semana que cruza o mês (antes e depois da virada), primeiro mês proporcional, fechamento de semana (guardar, passar pra frente, sem escolha, fim do mês, cruzando o mês), fechamento do mês, 13º, parcelas terminando, fome, sequência com perdão, nível, sugestão, atalhos, texto livre, falas.
+- **Motor de regras (72 testes):** cota da semana, tolerância do status, folga e estouro passando pra frente, registro retroativo, semana que cruza o mês (antes e depois da virada), primeiro mês proporcional, fechamento de semana (guardar, passar pra frente, sem escolha, fim do mês, cruzando o mês), fechamento do mês, 13º, parcelas terminando, fome, sequência com perdão, nível, sugestão, atalhos, texto livre, falas.
 - **Extrato (15):** OFX, CSV de conta, CSV de fatura, ponto e vírgula, valores brasileiros, conferência e limpeza de descrição.
 - **Cripto e servidor (8):** código de recuperação, derivação de chave, cifra/decifra, adulteração, servidor com KV falso.
 - **Dados de exemplo da prévia (1).**

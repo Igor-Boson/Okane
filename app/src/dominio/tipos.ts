@@ -51,7 +51,10 @@ export interface Atalho {
 export interface ItemFixo {
   id: string;
   nome: string;
+  /** Quanto sai a cada pagamento. */
   valor: Centavos;
+  /** Paga a cada N meses (ausente ou 1 = todo mês). O plano reserva valor ÷ N por mês. */
+  cada?: number;
 }
 
 export interface PlanoMes {
