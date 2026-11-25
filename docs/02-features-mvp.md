@@ -1,6 +1,6 @@
 # Okane: Features do MVP
 
-> **Status:** 🟡 Rascunho v0.1, esperando green light
+> **Status:** ✅ **Aprovado** (v1.0) · [protótipo clicável](https://claude.ai/artifact/3q7UBam9pt6Kn8VsbqQdQ8) em `prototype/`
 > **Etapa:** 2 de 4 (Propósito ✅ → **Features** → Arquitetura → Implementação)
 > **Base:** [01: Propósito, princípios e escopo](01-proposito-principios-escopo.md)
 > **Data:** 25/11/2026
@@ -15,14 +15,14 @@ Igual à etapa 1: aprova, recusa ou ajusta pelos IDs (`T1`, `F2`, `R3`, `PET-R2`
 
 | Bloco | Itens | Status |
 |---|---|---|
-| 1. Mapa do app | T1 a T5, O1 | 🟡 proposta |
-| 2. Registro e reflexão | F1 a F3 | 🟡 proposta |
-| 3. Regras do orçamento | R1 a R8 | 🟡 proposta |
-| 4. Regras do pet | PET-R1 a PET-R5 | 🟡 proposta |
-| 5. Falas do pet | Exemplos nos 2 tons | 🟡 proposta |
-| 6. Categorias iniciais | CAT | 🟡 proposta |
-| 7. Primeiro uso | O1 | 🟡 proposta |
-| 9. Decisões | D13 a D20 | ⏳ **preciso de respostas** |
+| 1. Mapa do app | T1 a T5, O1 | ✅ aprovado |
+| 2. Registro e reflexão | F1 a F3 | ✅ aprovado |
+| 3. Regras do orçamento | R1 a R8 | ✅ aprovado |
+| 4. Regras do pet | PET-R1 a PET-R5 | ✅ aprovado |
+| 5. Falas do pet | Exemplos nos 2 tons | ✅ aprovado |
+| 6. Categorias iniciais | CAT | ✅ aprovado |
+| 7. Primeiro uso | O1 | ✅ aprovado |
+| 9. Decisões | D13 a D20 | ✅ todas respondidas |
 
 > Os rascunhos de tela são **wireframes de texto**: mostram o que aparece e em que ordem, não o visual. O visual vem depois.
 
@@ -421,23 +421,25 @@ Cada situação vai ter de 5 a 10 variações por tom.
 
 ---
 
-## 9. Decisões (preciso de você)
+## 9. Decisões
 
-| ID | Pergunta | Minha recomendação |
+> ✅ Todas aprovadas como recomendado. Na D18 a escolha foi a **moedinha**; na D20, **sim**, o Sem filtro pode ter palavrão leve.
+
+| ID | Pergunta | Decisão |
 |---|---|---|
 | **D13** | Como funciona a digitação do valor? (a) `20` = R$ 20, com vírgula pros centavos (b) estilo maquininha: `2000` = R$ 20,00 | **(a)**: a maioria dos gastos é em reais redondos. Menos dígitos, mais rápido |
 | **D14** | "Valeu a pena?" na hora já no MVP, e a revisão atrasada (mais honesta) na v1? | **Sim.** Já coleta o dado desde o dia 1 |
 | **D15** | Sobrou dinheiro na semana: perguntar "guardar ou passar pra frente"? | **Sim, perguntar.** Se você não responder, passa pra frente |
 | **D16** | Sobra do mês vira "guardado" e não passa pro mês seguinte? | **Sim.** Cada mês começa limpo |
 | **D17** | Entrada extra (13º etc.) vai pro guardado por padrão, e você libera uma parte se quiser? | **Sim.** Lembrando que dezembro tem 13º |
-| **D18** | Visual do pet: (a) bolinha tipo mochi (b) moedinha com carinha (c) porquinho (d) outra ideia sua | **(a) ou (b)**: simples de desenhar em 6 estados e fácil de animar. O porquinho é óbvio demais |
-| **D19** | As 8 categorias iniciais estão boas? | Mexe à vontade |
-| **D20** | O tom Sem filtro pode ter palavrão leve? | Você decide: dá personalidade, mas é o tipo de coisa que cansa |
+| **D18** | Visual do pet | ✅ **Moedinha com carinha**, estilo 3D de brinquedo de vinil, gerada com o Gemini (Nano Banana Pro). Os 6 estados estão em `design/pet/` (PNG transparente 640px) e `prototype/pet/` (WebP 360px) |
+| **D19** | As 8 categorias iniciais estão boas? | ✅ Sim |
+| **D20** | O tom Sem filtro pode ter palavrão leve? | ✅ Sim, com moderação |
 
 ---
 
 ## 10. Próximos passos
 
-1. **Você:** green light ou ajustes + respostas de D13 a D20.
+1. ✅ **Etapa 2 aprovada.** Protótipo clicável publicado pra sentir o fluxo.
 2. **Etapa 3 (Arquitetura):** stack do PWA, armazenamento local + backup, como os números são calculados (R4), confirmar os comportamentos do iOS (O0, notificações), deploy e custo.
 3. **Etapa 4:** implementação, começando pelo ciclo **registrar → número da semana → reflexão** antes de qualquer outra coisa.
