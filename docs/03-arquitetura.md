@@ -1,6 +1,6 @@
 # Okane: Arquitetura
 
-> **Status:** 🟡 Rascunho v0.1, esperando green light
+> **Status:** ✅ **Aprovado** (v1.0) · implementado em `app/` (ver [04: Implementação](04-implementacao.md))
 > **Etapa:** 3 de 4 (Propósito ✅ → Features ✅ → **Arquitetura** → Implementação)
 > **Base:** [01: Propósito](01-proposito-principios-escopo.md) · [02: Features do MVP](02-features-mvp.md) · [protótipo](https://claude.ai/artifact/3q7UBam9pt6Kn8VsbqQdQ8)
 > **Data:** 25/11/2026
@@ -15,15 +15,15 @@ Mesmo esquema: IDs `A1`, `A2`... e decisões continuando a numeração (**D21 a 
 
 | Bloco | Itens | Status |
 |---|---|---|
-| 1. Visão geral | A1 | 🟡 proposta |
-| 2. Stack | A2 | 🟡 proposta |
-| 3. Dados | A3, A4 | 🟡 proposta |
-| 4. Backup | A5 | 🟡 proposta |
-| 5. PWA no iPhone | A6 | 🟡 proposta |
-| 6. Hospedagem e custo | A7 | 🟡 proposta |
-| 7. Qualidade | A8 | 🟡 proposta |
-| 8. Plano de implementação | M0 a M4 | 🟡 proposta |
-| 9. Decisões | D21 a D25 | ⏳ **preciso de respostas** |
+| 1. Visão geral | A1 | ✅ aprovado |
+| 2. Stack | A2 | ✅ aprovado |
+| 3. Dados | A3, A4 | ✅ aprovado |
+| 4. Backup | A5 | ✅ aprovado |
+| 5. PWA no iPhone | A6 | ✅ aprovado |
+| 6. Hospedagem e custo | A7 | ✅ aprovado |
+| 7. Qualidade | A8 | ✅ aprovado |
+| 8. Plano de implementação | M0 a M4 | ✅ implementado |
+| 9. Decisões | D21 a D25 | ✅ todas respondidas |
 
 ---
 
@@ -199,23 +199,23 @@ mudou algo ─▶ espera 10 s (ou o app ir pro fundo)
 
 ---
 
-## 9. Decisões (preciso de você)
+## 9. Decisões
 
-| ID | Pergunta | Minha recomendação |
+| ID | Pergunta | Decisão |
 |---|---|---|
-| **D21** | Svelte ou React? Você pretende mexer no código? | **Svelte**, a não ser que você já saiba React e queira manter o código. Aí React, sem drama |
-| **D22** | Backup automático criptografado na nuvem já no MVP (M4)? | **Sim.** Dado financeiro de meses não pode depender de lembrar de exportar |
-| **D23** | Hospedar na Cloudflare? Você cria a conta (grátis) e eu te guio pra conectar o repositório | **Sim** |
-| **D24** | Endereço: `okane-xxxx.pages.dev` (grátis) ou domínio próprio (~R$ 40/ano)? | **pages.dev** pra começar. Se quiser domínio, melhor decidir **antes** do uso real |
-| **D25** | Código de recuperação no lugar de login? Se perder o código **e** o celular, os dados se perdem | **Sim.** Login com e-mail e senha seria mais peso (P7) e mais coisa pra manter |
+| **D21** | Svelte ou React? | ✅ **Svelte** (você não pretende mexer no código) |
+| **D22** | Backup automático criptografado no MVP? | ✅ **Sim** |
+| **D23** | Hospedar na Cloudflare? | ✅ **Sim** (guia em [deploy.md](deploy.md)) |
+| **D24** | Endereço | ✅ **Grátis** (`*.pages.dev`) |
+| **D25** | Código de recuperação no lugar de login? | ✅ **Sim** ("o que for melhor"; dificilmente você perde código e celular juntos) |
 
 ---
 
 ## 10. Próximos passos
 
-1. **Você:** green light ou ajustes + respostas de D21 a D25.
-2. **Eu:** M0 e M1 em seguida (esqueleto + motor com testes). M0 precisa da sua conta na Cloudflare pra ir pro ar.
-3. **Você:** instala no iPhone e me conta se abriu certinho.
+1. ✅ **Etapa 3 aprovada** e M0–M4 implementados ([04](04-implementacao.md)).
+2. **Você:** seguir o [guia de deploy](deploy.md) (conta na Cloudflare, ~15 min).
+3. **Você:** instalar no iPhone e me contar se abriu certinho.
 
 ---
 
