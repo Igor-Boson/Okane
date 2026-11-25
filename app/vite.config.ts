@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { VitePWA } from 'vite-plugin-pwa';
+import pacote from './package.json' with { type: 'json' };
 
 export default defineConfig({
   plugins: [
@@ -34,6 +35,7 @@ export default defineConfig({
       },
     }),
   ],
+  define: { __VERSAO__: JSON.stringify(pacote.version) },
   build: { target: 'es2022' },
   test: {
     include: ['src/**/*.test.ts', 'server/**/*.test.ts'],

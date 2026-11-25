@@ -166,11 +166,20 @@ export interface Semana {
   porDia: number;
 }
 
+/**
+ * Cota de um trecho vista a partir de `hoje`. Se o mês do trecho já acabou (semana que cruza a virada),
+ * a sobra dele foi pro guardado do mês e o estouro ficou por lá (R3): o trecho vale exatamente o que foi gasto nele.
+ */
+export function cotaEfetiva(dados: Dados, seg: Segmento, hoje: DataISO): number {
+  if (seg.mes < mesDe(hoje)) return totalDe(gastosEntre(dados, seg.de, seg.ate));
+  return cotaDoSegmento(dados, seg);
+}
+
 /** R1: número da semana e status 🟢🟡🔴. */
 export function calcularSemana(dados: Dados, hoje: DataISO): Semana {
   const segunda = segundaDaSemana(hoje);
   const domingo = domingoDe(segunda);
-  const cota = soma(segmentosDaSemana(segunda).map(s => cotaDoSegmento(dados, s)));
+  const cota = soma(segmentosDaSemana(segunda).map(s => cotaEfetiva(dados, s, hoje)));
   const gastos = gastosEntre(dados, segunda, domingo);
   const gasto = totalDe(gastos);
   const pode = cota - gasto;
@@ -212,7 +221,8 @@ export function fecharSemana(dados: Dados, segunda: DataISO): FechamentoCalculad
   const domingo = domingoDe(segunda);
   const segs = segmentosDaSemana(segunda);
   const cotas = segs.map(s => cotaDoSegmento(dados, s));
-  const cota = soma(cotas);
+  // a parte do mês anterior já foi resolvida no fechamento daquele mês
+  const cota = soma(segs.map(s => cotaEfetiva(dados, s, domingo)));
   const gastos = gastosEntre(dados, segunda, domingo);
   const gasto = totalDe(gastos);
   const ultimo = segs[segs.length - 1];

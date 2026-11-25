@@ -141,12 +141,29 @@ describe('semana que cruza a virada do mês (R8)', () => {
     ]);
   });
 
-  it('soma a cota de cada mês e mostra um número só', () => {
+  it('no dia 30 (ainda novembro) soma a cota de cada mês e mostra um número só', () => {
     const d = cenario();
-    const s = calcularSemana(d, '2026-12-02');
+    const s = calcularSemana(d, '2026-11-30');
     const nov = (235000 - (189300 + 17000)) * 1 / 1; // o que sobrou de novembro cai inteiro no dia 30
     const dez = 235000 * 6 / 31; // em dezembro: notebook (2/4) + curso (3/3)
     expect(s.cota).toBeCloseTo(nov + dez);
+  });
+
+  it('virou o mês: a sobra de novembro vai pro guardado e some da semana', () => {
+    const d = cenario();
+    d.gastos.push(g('2026-11-30', 50), g('2026-12-01', 30));
+    const s = calcularSemana(d, '2026-12-02');
+    const dez = 235000 * 6 / 31;
+    expect(s.cota).toBeCloseTo(dez + 5000); // a parte de novembro vale só o que foi gasto nela
+    expect(s.gasto).toBe(8000);
+    expect(s.pode).toBeCloseTo(dez - 3000);
+  });
+
+  it('virou o mês: estouro de novembro também fica em novembro', () => {
+    const d = cenario();
+    d.gastos.push(g('2026-11-30', 900)); // estoura novembro
+    const s = calcularSemana(d, '2026-12-02');
+    expect(s.pode).toBeCloseTo(235000 * 6 / 31);
   });
 
   it('cada gasto conta no mês da sua data', () => {
@@ -220,6 +237,8 @@ describe('fechamento da semana (R2)', () => {
     expect(f.cruzaMes).toBe(true);
     expect(f.sobraDoMesAnterior).toBeCloseTo(235000 - 189300 - 17000);
     expect(f.escolhivel).toBe(Math.floor(235000 * 6 / 31));
+    expect(f.cota).toBeCloseTo(235000 * 6 / 31); // a parte de novembro (sem gastos) não entra
+    expect(f.sobra).toBeCloseTo(235000 * 6 / 31);
   });
 
   it('lista semanas terminadas e ainda abertas', () => {
