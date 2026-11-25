@@ -4,6 +4,7 @@
   import { acabouDeAtualizar } from '../pwa';
   import { verificarAberturas } from './aberturas';
   import Ajustes from './Ajustes.svelte';
+  import Conferir from './Conferir.svelte';
   import Folha from './Folha.svelte';
   import Gastos from './Gastos.svelte';
   import Inicio from './Inicio.svelte';
@@ -91,6 +92,7 @@
 {/if}
 
 {#if ui.ajustesAbertos}<Ajustes />{/if}
+{#if ui.conferirAberto}<Conferir />{/if}
 
 {#if ui.toast}
   {@const t = ui.toast}

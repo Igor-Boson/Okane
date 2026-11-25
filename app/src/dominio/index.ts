@@ -7,3 +7,4 @@ export * from './sugestao';
 export * from './texto';
 export * from './falas';
 export * from './categorias';
+export * from './extrato';

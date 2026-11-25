@@ -76,6 +76,8 @@
     </div>
   {/if}
 
+  <button class="link conferir" type="button" onclick={() => { ui.conferirAberto = true; }}>🧾 Conferir o mês com o extrato do banco ›</button>
+
   <p class="nota">Salário, fixos e parcelas de {nomeMes(estado.mes)} iguais ao mês passado?</p>
   <div class="btn-linha">
     <button class="btn primario" type="button" onclick={() => concluir(false)}>Sim, tudo igual</button>
@@ -90,5 +92,6 @@
   .n { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 99px; background: var(--gold-soft); color: var(--gold); font-weight: 800; font-size: 13px; display: grid; place-items: center; font-family: var(--f-display); }
   .cresce { flex: 1; display: grid; gap: 6px; }
   .area { height: auto; padding: 10px 12px; resize: none; font-size: 15px; }
+  .conferir { text-align: left; }
   .cartao-meta { background: var(--gold-soft); border-radius: 16px; padding: 12px; display: grid; gap: 10px; }
 </style>

@@ -24,6 +24,8 @@ export interface Ajustes {
   nivelVisto: number;
   /** Usar no navegador mesmo sem instalar. */
   semInstalar: boolean;
+  /** Lançamentos do extrato que você mandou ignorar na conferência. */
+  extratoIgnorados: string[];
 }
 
 export const AJUSTES_PADRAO: Ajustes = {
@@ -39,6 +41,7 @@ export const AJUSTES_PADRAO: Ajustes = {
   ultimoCheckOntem: null,
   nivelVisto: 1,
   semInstalar: false,
+  extratoIgnorados: [],
 };
 
 interface LinhaAjustes { chave: string; valor: Ajustes }

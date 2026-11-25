@@ -17,6 +17,7 @@ class UI {
   aba = $state<Aba>('inicio');
   folha = $state<Folha | null>(null);
   ajustesAbertos = $state(false);
+  conferirAberto = $state(false);
   toast = $state<{ texto: string; acao?: { rotulo: string; fazer: () => void } } | null>(null);
   /** Moedinha comemorando por alguns segundos. */
   comemorando = $state(false);

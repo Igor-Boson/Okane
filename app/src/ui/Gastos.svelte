@@ -103,6 +103,9 @@
       {/each}
     </div>
   {/if}
+  <button class="conferir" type="button" onclick={() => (ui.conferirAberto = true)}>
+    <span>🧾</span><span><b>Conferir com o extrato do banco</b><span class="nota">Descubra o que ficou sem registrar</span></span><span class="seta">›</span>
+  </button>
   {#if modo === 'mes' && desloc === 0 && mesDe(inicio) === estado.mes}
     <p class="nota">Este é o seu primeiro mês: o dinheiro livre é proporcional aos dias desde que você começou.</p>
   {/if}
@@ -131,4 +134,8 @@
   .item .w { font-size: 14px; text-align: center; }
   .vazio { display: grid; justify-items: center; gap: 8px; padding: 24px 0; text-align: center; color: var(--muted); }
   .vazio img { width: 110px; height: 110px; object-fit: contain; }
+  .conferir { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; text-align: left; padding: 12px 14px; border-radius: 16px; background: var(--surface-2); }
+  .conferir > span:first-child { font-size: 22px; }
+  .conferir .nota { display: block; }
+  .conferir .seta { font-size: 22px; color: var(--muted); }
 </style>
