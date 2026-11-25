@@ -14,9 +14,10 @@
 </div>
 
 <style>
-  .teclado { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  /* linhas de 40 a 54 px: crescem até 54 se sobrar espaço, encolhem até 40 em tela pequena */
+  .teclado { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(40px, 54px); gap: 6px; }
   .tecla {
-    height: clamp(42px, 6vh, 54px); border-radius: 14px; background: var(--surface-2);
+    min-height: 0; border-radius: 14px; background: var(--surface-2);
     font-family: var(--f-display); font-weight: 600; font-size: 24px; display: grid; place-items: center; user-select: none; -webkit-user-select: none;
   }
   .tecla:active { background: var(--gold-soft); }

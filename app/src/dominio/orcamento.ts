@@ -2,7 +2,7 @@ import {
   dataNoMes, diaDoMes, diasEntre, diasNoMes, maxData, mesDe, mesesEntre, minData, primeiroDia,
   segundaDaSemana, somarDias, somarMeses, ultimoDia,
 } from './datas';
-import type { Centavos, Dados, DataISO, EntradaExtra, Gasto, MesISO, Parcela, PlanoMes, Status } from './tipos';
+import type { Centavos, Dados, DataISO, EntradaExtra, Gasto, ItemFixo, MesISO, Parcela, PlanoMes, Status } from './tipos';
 
 /*
  * Regras do orçamento (docs/02, seção 3).
@@ -74,13 +74,19 @@ export interface ContaMes {
   livre: number;
 }
 
+/** Quanto um fixo pesa por mês: o valor inteiro, ou a reserva (valor ÷ N) se for pago a cada N meses. */
+export function reservaMensal(f: ItemFixo): Centavos {
+  const cada = Math.max(1, Math.round(f.cada ?? 1));
+  return Math.round(f.valor / cada);
+}
+
 export function contaDoMes(dados: Dados, mes: MesISO): ContaMes {
   const plano = planoDoMes(dados, mes);
   const dias = diasNoMes(mes);
   const diaInicial = diaInicialDoMes(dados, mes);
   const fator = diaInicial === null ? 0 : (dias - diaInicial + 1) / dias;
   const salario = plano?.salario ?? 0;
-  const fixos = soma((plano?.fixos ?? []).map(f => f.valor));
+  const fixos = soma((plano?.fixos ?? []).map(reservaMensal));
   const parcelas = soma(parcelasDoMes(dados, mes).map(p => p.parcela.valor));
   const metaGuardar = plano?.metaGuardar ?? 0;
   const ex = extrasDoMes(dados, mes);

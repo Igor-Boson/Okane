@@ -129,10 +129,11 @@
 </section>
 
 <style>
-  .inicio { min-height: 100%; display: flex; flex-direction: column; background: var(--surface); }
+  /* Ocupa a altura exata da área entre o topo e as abas; o teclado encolhe as teclas pra caber. */
+  .inicio { height: 100%; display: flex; flex-direction: column; background: var(--surface); }
   .heroi {
     background: radial-gradient(120% 90% at 0% 0%, var(--hero-2) 0%, var(--hero) 62%);
-    color: var(--hero-ink); padding: 4px 16px 14px; display: grid; gap: 8px; border-radius: 0 0 26px 26px;
+    color: var(--hero-ink); padding: 4px 16px 14px; display: grid; gap: 8px; border-radius: 0 0 26px 26px; flex: none;
   }
   .pet-linha { display: flex; align-items: center; gap: 10px; }
   .pet-btn { flex: 0 0 auto; border-radius: 50%; }
@@ -160,7 +161,10 @@
   .marca-ritmo { position: absolute; top: -4px; bottom: -4px; width: 2px; border-radius: 2px; background: var(--hero-ink); opacity: .75; }
   .legenda { display: flex; justify-content: space-between; font-size: 12px; color: var(--hero-muted); font-variant-numeric: tabular-nums; }
 
-  .registro { margin-top: auto; padding: 10px 16px 10px; display: grid; gap: 7px; }
+  .registro { margin-top: auto; min-height: 0; padding: 10px 16px 10px; display: flex; flex-direction: column; gap: 7px; }
+  .registro > :global(*) { flex: none; }
+  /* encolhe até 4 linhas de 40 px; se nem assim couber, a página rola */
+  .registro > :global(.teclado) { flex: 0 1 auto; min-height: calc(4 * 40px + 3 * 6px); }
   .valor-linha { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .valor { font-family: var(--f-display); font-weight: 700; font-size: 32px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; display: flex; align-items: center; min-width: 0; gap: 0; }
   .valor.vazio { color: var(--muted); opacity: .55; }
@@ -182,4 +186,15 @@
   .chip.sug { border-color: var(--gold-fill); background: var(--gold-soft); }
   .chip:active { transform: scale(.97); }
   .dica { font-size: 13px; color: var(--muted); padding: 4px 0; white-space: normal; }
+
+  /* tela baixa (iPhone SE e afins): aperta o topo pra o teclado caber sem rolar */
+  @media (max-height: 700px) {
+    .heroi { gap: 5px; padding-bottom: 10px; }
+    .pet-btn :global(.pet) { width: 60px !important; height: 60px !important; }
+    .balao { font-size: 13px; padding: 7px 10px; }
+    .grande { font-size: 38px; }
+    .registro { gap: 5px; padding-top: 6px; padding-bottom: 6px; }
+    .valor { font-size: 28px; }
+    .dica { font-size: 12px; padding: 0; }
+  }
 </style>

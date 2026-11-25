@@ -2,7 +2,7 @@
   import { estado, novoId } from '../dados/estado.svelte';
   import { mesCurtoAno, mesDe, nomeMes, somarMeses } from '../dominio/datas';
   import { brl0 } from '../dominio/dinheiro';
-  import { calcularSemana, contaDoMes, extrasDoMes, mediaSemanal, parcelasDoMes } from '../dominio/orcamento';
+  import { calcularSemana, contaDoMes, extrasDoMes, mediaSemanal, parcelasDoMes, reservaMensal } from '../dominio/orcamento';
   import type { PlanoMes } from '../dominio/tipos';
   import CampoDinheiro from './CampoDinheiro.svelte';
   import Desejos from './Desejos.svelte';
@@ -16,6 +16,9 @@
   const extras = $derived(extrasDoMes(estado.dados, mes));
   const primeiroMes = $derived(mes === mesDe(estado.ajustes.inicio ?? mes));
   const cotaSemana = $derived(desloc === 0 ? calcularSemana(estado.dados, estado.hoje).cota : null);
+
+  const FREQUENCIAS: [number, string][] = [[1, 'todo mês'], [2, 'a cada 2 meses'], [3, 'a cada 3 meses'], [6, 'a cada 6 meses'], [12, '1× por ano']];
+  const nomeFrequencia = (cada = 1) => FREQUENCIAS.find(([n]) => n === cada)?.[1] ?? `a cada ${cada} meses`;
 
   let novoFixo = $state('');
   let novaParcela = $state({ nome: '', valor: 0, faltam: 2 });
@@ -71,8 +74,17 @@
     <div class="cartao-topo"><span>📌 Fixos</span><span class="v">{brl0(conta.fixos)}</span></div>
     {#each plano.fixos as f, i (f.id)}
       <div class="item-linha">
-        <input class="nome-in" aria-label="Nome do fixo" value={f.nome}
-          onchange={e => salvar({ fixos: plano.fixos.map((x, j) => (j === i ? { ...x, nome: (e.currentTarget as HTMLInputElement).value.trim() || x.nome } : x)) })} />
+        <span class="fixo">
+          <input class="nome-in" aria-label="Nome do fixo" value={f.nome}
+            onchange={e => salvar({ fixos: plano.fixos.map((x, j) => (j === i ? { ...x, nome: (e.currentTarget as HTMLInputElement).value.trim() || x.nome } : x)) })} />
+          <span class="freq" class:on={(f.cada ?? 1) > 1}>
+            {nomeFrequencia(f.cada)}{(f.cada ?? 1) > 1 ? ` · ${brl0(reservaMensal(f))}/mês` : ''} ▾
+            <select aria-label="Frequência de {f.nome}" value={f.cada ?? 1}
+              onchange={e => salvar({ fixos: plano.fixos.map((x, j) => (j === i ? { ...x, cada: Number((e.currentTarget as HTMLSelectElement).value) } : x)) })}>
+              {#each FREQUENCIAS as [n, rot] (n)}<option value={n}>{rot}</option>{/each}
+            </select>
+          </span>
+        </span>
         <span class="direita">
           <CampoDinheiro rotulo={f.nome} valor={f.valor} largura="92px" aoMudar={v => salvar({ fixos: plano.fixos.map((x, j) => (j === i ? { ...x, valor: v } : x)) })} />
           <button class="x" type="button" aria-label="Remover {f.nome}" onclick={() => salvar({ fixos: plano.fixos.filter((_, j) => j !== i) })}>×</button>
@@ -163,6 +175,11 @@
   .nav-mes button:disabled { opacity: .25; }
   .primeiro { border-top: 0; }
   .direita { display: flex; align-items: center; gap: 4px; }
+  .fixo { flex: 1; min-width: 0; display: grid; }
+  .freq { position: relative; justify-self: start; font-size: 12px; color: var(--muted); margin-top: -4px; padding-bottom: 2px; }
+  .freq.on { color: var(--gold); font-weight: 600; }
+  /* select invisível por cima do texto: abre o seletor nativo, e com 16px o iPhone não dá zoom */
+  .freq select { position: absolute; inset: 0; width: 100%; opacity: 0; font-size: 16px; appearance: none; }
   .nome-in { flex: 1; min-width: 0; border: 0; background: transparent; font-size: 16px; padding: 6px 0; }
   .nome-in:focus { outline: none; }
   .nome-in::placeholder { color: var(--gold); font-weight: 600; }

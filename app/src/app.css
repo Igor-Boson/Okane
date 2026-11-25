@@ -51,8 +51,11 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 html { -webkit-text-size-adjust: 100%; }
+/* Fundo da página: índigo em cima (atrás da barra de status), cor da barra de abas embaixo.
+   Se o iPhone deixar alguma faixa fora da casca, ela fica da mesma cor do que está do lado. */
+html { background: var(--surface) linear-gradient(var(--hero), var(--hero)) top / 100% 50% no-repeat; }
 body {
-  background: var(--hero); color: var(--ink);
+  color: var(--ink);
   font-family: var(--f-body); font-size: 15px; line-height: 1.4;
   -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
@@ -69,10 +72,15 @@ p { margin: 0; }
 .num { font-family: var(--f-display); font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------ casca */
-.casca { height: 100%; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; background: var(--surface); position: relative; overflow: hidden; }
+/* Presa nas bordas da tela (e não em height: 100%): no app instalado o iOS às vezes calcula a
+   altura sem a barra de status e sobrava uma faixa embaixo das abas. --altura-tela vem de tela.ts. */
+.casca {
+  position: fixed; top: 0; bottom: 0; left: 0; right: 0; height: var(--altura-tela, auto);
+  max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; background: var(--surface); overflow: hidden;
+}
 @media (min-width: 560px) {
-  body { background: var(--bg); padding-block: 24px; }
-  .casca { height: min(900px, 100%); border-radius: 28px; box-shadow: var(--shadow); }
+  html { background: var(--bg); }
+  .casca { top: 24px; bottom: 24px; height: auto; max-height: 900px; margin: auto; border-radius: 28px; box-shadow: var(--shadow); }
 }
 .topo {
   background: var(--hero); color: var(--hero-ink);
