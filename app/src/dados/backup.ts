@@ -25,6 +25,7 @@ async function chaves(codigo: string): Promise<Chaves> {
 
 /** Pergunta ao servidor se o backup na nuvem está ligado. */
 export async function verificarServidor(): Promise<Disponibilidade> {
+  if (__PREVIA__) return (disponivel = 'nao-configurado');
   try {
     const r = await fetch('/api/saude', { cache: 'no-store' });
     if (!r.ok || !(r.headers.get('content-type') ?? '').includes('json')) return (disponivel = 'nao-configurado');

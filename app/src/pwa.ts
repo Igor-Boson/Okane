@@ -7,7 +7,7 @@ const CHAVE = 'okane-atualizado';
  * quando o app vai pro fundo, sem interromper um registro no meio.
  */
 export function registrarAtualizacao() {
-  if (import.meta.env.DEV || !('serviceWorker' in navigator)) return;
+  if (__PREVIA__ || import.meta.env.DEV || !('serviceWorker' in navigator)) return;
   let precisa = false;
   const atualizar = registerSW({
     onNeedRefresh() { precisa = true; },

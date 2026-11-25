@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from '../imagens';
   import { estado } from '../../dados/estado.svelte';
   import { fala } from '../../dominio/falas';
   import { ui } from '../ui.svelte';
@@ -22,7 +23,7 @@
 </script>
 
 <div class="pilha">
-  <div class="fala"><img src="/pet/preocupado.webp" alt="" /><p>{frase}</p></div>
+  <div class="fala"><img src={urlPet('preocupado')} alt="" /><p>{frase}</p></div>
   <div class="btn-linha">
     <button class="btn ouro" type="button" onclick={zero}>✨ Sim, zero gasto!</button>
     <button class="btn suave" type="button" onclick={esqueci}>😅 Esqueci, vou registrar</button>

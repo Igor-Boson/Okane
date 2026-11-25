@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from './imagens';
   import { estado } from '../dados/estado.svelte';
   import { mesDe, nomeMes, periodoSemana, primeiroDia, rotuloDia, somarDias, somarMeses, ultimoDia } from '../dominio/datas';
   import { brl, brl0 } from '../dominio/dinheiro';
@@ -70,7 +71,7 @@
 
   {#if lista.length === 0 && zeros.length === 0}
     <div class="vazio">
-      <img src="/pet/feliz.webp" alt="" />
+      <img src={urlPet('feliz')} alt="" />
       <p>{desloc === 0 ? fala('semDados', estado.ajustes.tom) : 'Nada registrado nesse período.'}</p>
     </div>
   {:else}

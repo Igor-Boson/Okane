@@ -226,7 +226,9 @@
           <div class="stat"><div class="k">Nuvem</div><div class="v pequeno">{servidor === 'sim' ? 'Ligada' : servidor === 'offline' ? 'Sem internet' : servidor === 'nao-configurado' ? 'Não configurada' : '…'}</div></div>
           <div class="stat"><div class="k">Último backup</div><div class="v pequeno">{quando(estado.ajustes.ultimoBackupEm)}</div></div>
         </div>
-        {#if servidor === 'nao-configurado'}
+        {#if __PREVIA__}
+          <p class="nota">Na prévia, o backup na nuvem e os arquivos ficam desligados. Os dados daqui não vão pro app de verdade.</p>
+        {:else if servidor === 'nao-configurado'}
           <p class="nota">O servidor ainda não tem o armazenamento de backup ligado (veja o guia de deploy). Enquanto isso, use o arquivo.</p>
         {/if}
         {#if estado.ajustes.backupErro && servidor === 'sim'}<p class="nota erro">Último erro: {estado.ajustes.backupErro}</p>{/if}
@@ -240,12 +242,15 @@
           <p class="nota">Ele é seu login e sua chave: guarde nas Notas ou nas Senhas do iPhone. Sem ele, um backup não abre.</p>
         </div>
         <button class="btn primario" type="button" disabled={enviando || servidor !== 'sim'} onclick={backupAgora}>{enviando ? 'Enviando…' : 'Fazer backup agora'}</button>
+        {#if !__PREVIA__}
         <div class="btn-linha">
           <button class="btn suave" type="button" onclick={() => exportar('arquivo')}>Salvar arquivo</button>
           <button class="btn suave" type="button" onclick={() => exportar('csv')}>Planilha (CSV)</button>
         </div>
         <p class="nota">Arquivo salvo: {quando(estado.ajustes.ultimoArquivoEm)}.</p>
+        {/if}
 
+        {#if !__PREVIA__}
         <details class="restaurar">
           <summary>Restaurar de outro backup</summary>
           <div class="pilha">
@@ -265,6 +270,7 @@
             {/if}
           </div>
         </details>
+        {/if}
       </div>
 
       <div class="bloco">

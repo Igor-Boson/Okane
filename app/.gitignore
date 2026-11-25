@@ -5,3 +5,4 @@ dev-dist/
 coverage/
 test-results/
 *.log
+dist-previa/

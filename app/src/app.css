@@ -29,7 +29,7 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0C0D1C; --surface: #15172C; --surface-2: #1F2240; --ink: #EDEEF8; --muted: #989CBE; --line: #2A2D4B;
     --gold: #F2B93B; --gold-fill: #F2B93B; --gold-soft: #3A2E12;
     --ok: #4CC38A; --ok-soft: #163426; --warn: #F0A73A; --warn-soft: #3A2A10; --bad: #F07070; --bad-soft: #3E1C20;
@@ -37,6 +37,15 @@
     --hero: #1A1C3A; --hero-2: #2F3366; --bubble: #33376A; --bubble-ink: #F4F2EC;
     color-scheme: dark;
   }
+}
+/* tema escolhido à mão (ex.: visualizador de prévia) */
+:root[data-theme="dark"] {
+  --bg: #0C0D1C; --surface: #15172C; --surface-2: #1F2240; --ink: #EDEEF8; --muted: #989CBE; --line: #2A2D4B;
+  --gold: #F2B93B; --gold-fill: #F2B93B; --gold-soft: #3A2E12;
+  --ok: #4CC38A; --ok-soft: #163426; --warn: #F0A73A; --warn-soft: #3A2A10; --bad: #F07070; --bad-soft: #3E1C20;
+  --scrim: rgba(0, 0, 0, .55); --shadow: 0 12px 32px rgba(0, 0, 0, .45);
+  --hero: #1A1C3A; --hero-2: #2F3366; --bubble: #33376A; --bubble-ink: #F4F2EC;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -73,6 +82,7 @@ p { margin: 0; }
 .marca { display: flex; align-items: baseline; gap: 6px; }
 .marca .kana { font-family: var(--f-kana); font-weight: 700; font-size: 17px; color: var(--gold-fill); }
 .marca .nome { font-family: var(--f-display); font-weight: 800; font-size: 19px; letter-spacing: -.01em; }
+.marca .previa { font-size: 11px; font-weight: 700; color: var(--hero-ink); background: rgba(255,255,255,.12); border-radius: 99px; padding: 2px 8px; align-self: center; }
 .botao-icone { width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; background: rgba(255,255,255,.08); color: var(--hero-muted); }
 .botao-icone svg { width: 20px; height: 20px; }
 main.conteudo { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }

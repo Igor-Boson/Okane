@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from './imagens';
   import { lerArquivoDeBackup } from '../dados/arquivos';
   import { baixarBackup } from '../dados/backup';
   import { gerarCodigo, normalizarCodigo } from '../dados/cripto';
@@ -116,7 +117,12 @@
       </div>
       <div class="acoes">
         <button class="btn ouro" type="button" onclick={() => (passo = 'salario')}>Começar</button>
-        <button class="btn suave" type="button" onclick={() => (passo = 'restaurar')}>Já uso o Okane</button>
+        {#if __PREVIA__}
+          <button class="btn suave" type="button" disabled={salvando} onclick={async () => { salvando = true; await estado.carregarExemplo(); }}>Explorar com dados de exemplo</button>
+          <p class="nota centro-t">Prévia pra testar: os dados ficam só aqui e não vão pro app de verdade.</p>
+        {:else}
+          <button class="btn suave" type="button" onclick={() => (passo = 'restaurar')}>Já uso o Okane</button>
+        {/if}
       </div>
 
     {:else if passo === 'restaurar'}
@@ -204,7 +210,7 @@
           <button type="button" class:on={tom === 'sem'} onclick={() => (tom = 'sem')}>🌶️ Sem filtro</button>
         </div>
       </div>
-      <div class="fala"><img src="/pet/{tom === 'fofo' ? 'feliz' : 'preocupado'}.webp" alt="" /><p>{fala('grande', tom, { v: 'R$ 180', pct: 45 }, () => 0)}</p></div>
+      <div class="fala"><img src={urlPet(tom === 'fofo' ? 'feliz' : 'preocupado')} alt="" /><p>{fala('grande', tom, { v: 'R$ 180', pct: 45 }, () => 0)}</p></div>
       <div class="acoes"><button class="btn primario" type="button" disabled={!nomePet.trim()} onclick={avancar}>Continuar</button></div>
 
     {:else if passo === 'codigo'}

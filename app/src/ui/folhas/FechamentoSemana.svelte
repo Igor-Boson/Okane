@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from '../imagens';
   import { onDestroy, untrack } from 'svelte';
   import { estado } from '../../dados/estado.svelte';
   import { nomeMes, periodoSemana, mesDe } from '../../dominio/datas';
@@ -53,7 +54,7 @@
     <div class="stat"><div class="k">Sequência</div><div class="v">{estado.seq.dias} {estado.seq.dias === 1 ? 'dia' : 'dias'}{estado.seq.dias >= 2 ? ' 🔥' : ''}</div></div>
   </div>
 
-  <div class="fala"><img src="/pet/{sobrou ? 'comemorando' : 'abatido'}.webp" alt="" /><p>{frase}</p></div>
+  <div class="fala"><img src={urlPet(sobrou ? 'comemorando' : 'abatido')} alt="" /><p>{frase}</p></div>
 
   {#if f.cruzaMes && f.sobraDoMesAnterior > 0}
     <p class="nota">{brl0(f.sobraDoMesAnterior)} da parte de {nomeMes(mesDe(segunda))} ficam no fechamento daquele mês.</p>

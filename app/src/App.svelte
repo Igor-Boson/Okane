@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from './ui/imagens';
   import { onMount } from 'svelte';
   import { ligarBackupAutomatico } from './dados/backup';
   import { estado } from './dados/estado.svelte';
@@ -9,7 +10,7 @@
   const nav = navigator as Navigator & { standalone?: boolean };
   const ios = /iPad|iPhone|iPod/.test(nav.userAgent) || (nav.platform === 'MacIntel' && nav.maxTouchPoints > 1);
   const instalado = nav.standalone === true || matchMedia('(display-mode: standalone)').matches;
-  const precisaInstalar = ios && !instalado;
+  const precisaInstalar = !__PREVIA__ && ios && !instalado;
 
   onMount(() => {
     void estado.carregar();
@@ -20,14 +21,14 @@
 <div class="casca">
   {#if estado.erroCarga}
     <div class="pagina centro">
-      <img class="pet-carga" src="/pet/preocupado.webp" alt="" />
+      <img class="pet-carga" src={urlPet('preocupado')} alt="" />
       <h1>Não consegui abrir seus dados</h1>
       <p class="nota">{estado.erroCarga}</p>
       <p class="nota">Feche o app e abra de novo. Se continuar, restaure pelo código de recuperação.</p>
     </div>
   {:else if !estado.carregado}
     <div class="pagina centro" aria-busy="true">
-      <img class="pet-carga" src="/pet/feliz.webp" alt="" />
+      <img class="pet-carga" src={urlPet('feliz')} alt="" />
     </div>
   {:else if precisaInstalar && !estado.ajustes.semInstalar && !estado.ajustes.inicio}
     <Instalar />

@@ -3,10 +3,14 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { VitePWA } from 'vite-plugin-pwa';
 import pacote from './package.json' with { type: 'json' };
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const previa = mode === 'previa';
+  return {
+  base: previa ? './' : '/',
   plugins: [
     svelte(),
     VitePWA({
+      disable: previa,
       registerType: 'prompt',
       injectRegister: false,
       includeAssets: ['icons/*.png', 'pet/*.webp'],
@@ -35,10 +39,11 @@ export default defineConfig({
       },
     }),
   ],
-  define: { __VERSAO__: JSON.stringify(pacote.version) },
-  build: { target: 'es2022' },
+  define: { __VERSAO__: JSON.stringify(pacote.version), __PREVIA__: JSON.stringify(previa) },
+  build: { target: 'es2022', outDir: previa ? 'dist-previa' : 'dist' },
   test: {
     include: ['src/**/*.test.ts', 'server/**/*.test.ts'],
     environment: 'node',
   },
+};
 });

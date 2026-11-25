@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from './imagens';
   import type { ImagemPet } from '../dominio/pet';
 
   let { imagem, tamanho = 80, animado = true }: { imagem: ImagemPet; tamanho?: number; animado?: boolean } = $props();
@@ -6,7 +7,7 @@
 
 <span class="pet" style="width:{tamanho}px;height:{tamanho}px">
   {#key imagem}
-    <img class="pop" class:balanca={animado} src="/pet/{imagem}.webp" alt="" width={tamanho} height={tamanho} />
+    <img class="pop" class:balanca={animado} src={urlPet(imagem)} alt="" width={tamanho} height={tamanho} />
   {/key}
   {#if imagem === 'dormindo'}<span class="zz" aria-hidden="true">z z</span>{/if}
 </span>

@@ -5,6 +5,8 @@ import { diasJuntos, fomeDoPet, humorDoStatus, nivelDe, sequencia } from '../dom
 import type {
   Atalho, Categoria, Dados, DataISO, Desejo, DiaSemGasto, EntradaExtra, FechamentoSemana, Gasto, MesFechado, MesISO, Parcela, PlanoMes,
 } from '../dominio/tipos';
+import { gerarCodigo } from './cripto';
+import { gerarExemplo } from './exemplo';
 import { AJUSTES_PADRAO, OkaneDB, exportarTudo, gravarAjustes, importarTudo, lerAjustes, type Ajustes, type Snapshot } from './db';
 
 export const novoId = () => crypto.randomUUID();
@@ -257,6 +259,23 @@ class Estado {
     this.planos = [plano];
     this.parcelas = parcelas;
     await this.ajustar({ inicio: hoje, nomePet: p.nomePet.trim() || 'Moedinha', tom: p.tom, codigo: p.codigo, ultimoCheckOntem: hoje });
+  }
+
+  // ------------------------------------------------------------ prévia
+
+  /** Só na prévia: começa com ~18 dias de dados de exemplo. */
+  async carregarExemplo() {
+    const ex = gerarExemplo(hojeISO(), novoId);
+    await this.db.transaction('rw', [this.db.categorias, this.db.planos, this.db.parcelas, this.db.gastos, this.db.desejos], async () => {
+      await this.db.categorias.bulkPut(ex.categorias);
+      await this.db.planos.bulkPut(ex.planos);
+      await this.db.parcelas.bulkPut(ex.parcelas);
+      await this.db.gastos.bulkPut(ex.gastos);
+      await this.db.desejos.bulkPut(ex.desejos);
+    });
+    await gravarAjustes(this.db, { ...AJUSTES_PADRAO, inicio: ex.inicio, codigo: gerarCodigo(), nomePet: 'Moedinha', ultimoCheckOntem: hojeISO() });
+    this.carregado = false;
+    await this.carregar();
   }
 
   // ------------------------------------------------------------ backup e importação

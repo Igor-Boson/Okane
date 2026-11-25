@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from '../imagens';
   import { onDestroy, onMount, untrack } from 'svelte';
   import { estado } from '../../dados/estado.svelte';
   import { periodoSemana, rotuloDia, segundaDaSemana } from '../../dominio/datas';
@@ -87,7 +88,7 @@
       {/if}
       {#if minutos}<span class="linha">⏱️ ≈ {textoTempoDeTrabalho(minutos)} do teu trabalho.</span>{/if}
     </div>
-    <div class="fala"><img src="/pet/{imagem}.webp" alt="" /><p>{frase}</p></div>
+    <div class="fala"><img src={urlPet(imagem)} alt="" /><p>{frase}</p></div>
     {#if !cat.essencial && respondido === null}
       <div class="valeu">
         <span class="q">Valeu a pena?</span>

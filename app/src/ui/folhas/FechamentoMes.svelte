@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { urlPet } from '../imagens';
   import { onDestroy, untrack } from 'svelte';
   import { estado } from '../../dados/estado.svelte';
   import { mesDe, nomeMes } from '../../dominio/datas';
@@ -43,7 +44,7 @@
 
 <div class="pilha">
   <h2>{nomeMes(m).replace(/^./, c => c.toUpperCase())} fechado</h2>
-  <div class="fala"><img src="/pet/{r.sobra >= 0 ? 'comemorando' : 'abatido'}.webp" alt="" /><p>{frase}</p></div>
+  <div class="fala"><img src={urlPet(r.sobra >= 0 ? 'comemorando' : 'abatido')} alt="" /><p>{frase}</p></div>
 
   <div class="kakeibo">
     <div class="q"><span class="n">1</span><div><b>Quanto você tinha?</b><p>{brl0(r.conta.livre)} livres pros gastos{primeiroMes && r.conta.fator < 1 ? ' (proporcional aos dias de uso)' : ''}.</p></div></div>
