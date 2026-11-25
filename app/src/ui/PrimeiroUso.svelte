@@ -33,7 +33,7 @@
   let codigoRestaurar = $state('');
   let erro = $state<string | null>(null);
   let buscando = $state(false);
-  let achado = $state<Snapshot | null>(null);
+  let achado = $state.raw<Snapshot | null>(null);
   let arquivoInput: HTMLInputElement | undefined = $state();
 
   const indice = $derived(ORDEM.indexOf(passo));
@@ -82,11 +82,16 @@
   }
   async function restaurar() {
     if (!achado) return;
+    erro = null;
     const c = normalizarCodigo(codigoRestaurar);
-    await estado.importar(achado);
-    if (c) await estado.ajustar({ codigo: c });
-    else if (!estado.ajustes.codigo) await estado.ajustar({ codigo: gerarCodigo() });
-    ui.festejar(fala('restaurado', estado.ajustes.tom));
+    try {
+      await estado.importar(achado);
+      if (c) await estado.ajustar({ codigo: c });
+      else if (!estado.ajustes.codigo) await estado.ajustar({ codigo: gerarCodigo() });
+      ui.festejar(fala('restaurado', estado.ajustes.tom));
+    } catch (e) {
+      erro = 'Não consegui restaurar: ' + (e instanceof Error ? e.message : String(e));
+    }
   }
 </script>
 

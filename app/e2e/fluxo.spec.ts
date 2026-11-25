@@ -1,17 +1,8 @@
 import { expect, test, type Page } from '@playwright/test';
+import { digitar, preencherDinheiro } from './ajuda';
 
 const FOTOS = process.env.FOTOS_DIR;
 const foto = async (page: Page, nome: string) => { if (FOTOS) await page.screenshot({ path: `${FOTOS}/${nome}.png` }); };
-
-async function digitar(page: Page, teclas: string) {
-  for (const t of teclas) await page.getByRole('button', { name: t === ',' ? 'Vírgula' : t, exact: true }).click();
-}
-
-async function preencherDinheiro(page: Page, rotulo: string, valor: string) {
-  const campo = page.getByLabel(rotulo, { exact: true });
-  await campo.fill(valor);
-  await campo.blur();
-}
 
 test('do primeiro uso ao fechamento do mês', async ({ page }) => {
   await page.clock.setFixedTime(new Date('2026-11-25T10:00:00-03:00'));

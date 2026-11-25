@@ -17,7 +17,7 @@
   let mostrarCodigo = $state(false);
   let codigoRestaurar = $state('');
   let restaurando = $state(false);
-  let confirmarSubstituir = $state<Snapshot | null>(null);
+  let confirmarSubstituir = $state.raw<Snapshot | null>(null);
   let confirmarApagar = $state(false);
   let erro = $state<string | null>(null);
   let novaCat = $state({ emoji: '🏷️', nome: '' });
@@ -114,7 +114,12 @@
   async function substituir() {
     if (!confirmarSubstituir) return;
     const codigoNovo = normalizarCodigo(codigoRestaurar);
-    await estado.importar(confirmarSubstituir);
+    try {
+      await estado.importar(confirmarSubstituir);
+    } catch (e) {
+      erro = 'Não consegui restaurar: ' + (e instanceof Error ? e.message : String(e));
+      return;
+    }
     if (codigoNovo) await estado.ajustar({ codigo: codigoNovo });
     confirmarSubstituir = null;
     codigoRestaurar = '';

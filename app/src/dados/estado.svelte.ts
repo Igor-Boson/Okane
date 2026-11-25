@@ -266,7 +266,8 @@ class Estado {
   }
 
   async importar(s: Snapshot) {
-    await importarTudo(this.db, s);
+    // garante objetos simples (o IndexedDB não grava proxies reativos)
+    await importarTudo(this.db, $state.snapshot(s) as Snapshot);
     this.carregado = false;
     await this.carregar();
   }
