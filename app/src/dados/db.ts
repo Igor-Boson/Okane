@@ -26,6 +26,8 @@ export interface Ajustes {
   semInstalar: boolean;
   /** Lançamentos do extrato que você mandou ignorar na conferência. */
   extratoIgnorados: string[];
+  /** Modo discreto: troca os valores por "R$ •••" pra mostrar o app pra alguém. */
+  esconderValores: boolean;
 }
 
 export const AJUSTES_PADRAO: Ajustes = {
@@ -42,6 +44,7 @@ export const AJUSTES_PADRAO: Ajustes = {
   nivelVisto: 1,
   semInstalar: false,
   extratoIgnorados: [],
+  esconderValores: false,
 };
 
 interface LinhaAjustes { chave: string; valor: Ajustes }

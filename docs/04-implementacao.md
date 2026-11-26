@@ -12,7 +12,7 @@
 - **O MVP inteiro está pronto** (M0 a M4), mais **várias features da v1** e uma da lista "depois" (conferência com extrato).
 - **Dá pra testar hoje, sem configurar nada:** a prévia acima roda o app de verdade. Na primeira tela, toque em **"Explorar com dados de exemplo"**.
 - **Pra usar de verdade** falta só você seguir o [guia de deploy](deploy.md) (conta grátis na Cloudflare, ~15 min) e instalar no iPhone.
-- **Qualidade:** 96 testes de unidade, 3 testes ponta a ponta, tipos sem erro e sem aviso, CI no GitHub Actions.
+- **Qualidade:** 96 testes de unidade, 4 testes ponta a ponta, tipos sem erro e sem aviso, CI no GitHub Actions.
 
 ---
 
@@ -48,6 +48,7 @@
 | Texto livre: "uber 12,50" sem usar o teclado | Início |
 | Exportar planilha (CSV) e arquivo de backup | Ajustes |
 | **Conferência com o extrato do banco** (OFX/CSV) com % de completude (meta PR-3: 90%) | Gastos → "Conferir com o extrato" |
+| **Modo discreto:** troca todos os valores por "R$ •••" pra mostrar o app pra alguém (planilha e backup não mudam) | Ajustes → 🙈 Modo discreto |
 
 ---
 
@@ -109,10 +110,11 @@ prototype/            ← o protótipo clicável da etapa 2 (histórico)
 - **Extrato (15):** OFX, CSV de conta, CSV de fatura, ponto e vírgula, valores brasileiros, conferência e limpeza de descrição.
 - **Cripto e servidor (8):** código de recuperação, derivação de chave, cifra/decifra, adulteração, servidor com KV falso.
 - **Dados de exemplo da prévia (1).**
-- **Ponta a ponta (3), num iPhone emulado:**
+- **Ponta a ponta (4), num iPhone emulado:**
   1. instalação → primeiro uso → registro → reflexão → texto livre → atalho → gasto grande → desfazer → editar → plano → ajustes → recarregar → virada do mês e da semana → check de ontem;
   2. backup num aparelho e restauração em outro pelo código, conferindo que o servidor só guarda bytes ilegíveis;
-  3. conferência com um CSV no formato do Nubank.
+  3. conferência com um CSV no formato do Nubank;
+  4. modo discreto: nenhum valor aparece no Início, nos Gastos, na edição e no Plano, e tudo volta ao desligar.
 
 **O que os testes não cobrem:** o Safari de verdade. Aqui só tenho o motor do Chrome. Os comportamentos próprios do iPhone (instalação, armazenamento, barra de status) precisam do seu teste no aparelho: é o checklist do [guia de deploy](deploy.md#7-checklist-do-primeiro-dia-é-o-m0-confirmar-o-iphone).
 

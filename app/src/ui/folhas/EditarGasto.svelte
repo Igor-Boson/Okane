@@ -1,6 +1,7 @@
 <script lang="ts">
   import { estado } from '../../dados/estado.svelte';
   import { centavosParaTexto, paraCentavos } from '../../dominio/dinheiro';
+  import { ESCONDIDO, escondendo } from '../dinheiro';
   import { ui } from '../ui.svelte';
 
   let { gastoId }: { gastoId: string } = $props();
@@ -35,7 +36,11 @@
     <h2>Editar gasto</h2>
     <div class="duas">
       <label class="campo"><span>Valor</span>
-        <input class="entrada" id="ed-valor" type="text" inputmode="decimal" bind:value={valor} autocomplete="off" />
+        {#if escondendo()}
+          <input class="entrada" id="ed-valor" type="text" value={ESCONDIDO} readonly aria-label="Valor escondido (modo discreto)" />
+        {:else}
+          <input class="entrada" id="ed-valor" type="text" inputmode="decimal" bind:value={valor} autocomplete="off" />
+        {/if}
       </label>
       <label class="campo"><span>Data</span>
         <input class="entrada" id="ed-data" type="date" bind:value={data} max={estado.hoje} min={estado.ajustes.inicio ?? undefined} />

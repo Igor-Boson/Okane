@@ -1,6 +1,6 @@
 <script lang="ts">
   import { estado } from '../../dados/estado.svelte';
-  import { brl } from '../../dominio/dinheiro';
+  import { brl } from '../dinheiro';
   import { registrar, registroAtual } from '../registrar';
   import { ui } from '../ui.svelte';
 

@@ -5,7 +5,7 @@
   import { normalizarCodigo } from '../dados/cripto';
   import type { Snapshot } from '../dados/db';
   import { estado, novoId } from '../dados/estado.svelte';
-  import { brl } from '../dominio/dinheiro';
+  import { brl } from './dinheiro';
   import { fala } from '../dominio/falas';
   import { atalhosAprendidos, chaveAtalho } from '../dominio/sugestao';
   import type { Categoria } from '../dominio/tipos';
@@ -148,6 +148,17 @@
 
   <div class="rola">
     <section class="pagina">
+      <div class="bloco">
+        <div class="linha-interruptor">
+          <div>
+            <h3>🙈 Modo discreto</h3>
+            <p class="nota">Troca todos os valores por “R$ •••” pra mostrar o app pra alguém. Planilha e backup continuam com os valores.</p>
+          </div>
+          <button class="interruptor" type="button" role="switch" aria-checked={estado.ajustes.esconderValores} aria-label="Esconder valores"
+            onclick={() => estado.ajustar({ esconderValores: !estado.ajustes.esconderValores })}><i></i></button>
+        </div>
+      </div>
+
       <div class="bloco">
         <h3>🪙 Moedinha</h3>
         <label class="campo"><span>Nome</span>
@@ -322,5 +333,11 @@
   .codigo-v { font-size: 18px; font-weight: 700; letter-spacing: .04em; word-break: break-all; }
   .erro { color: var(--bad); }
   .restaurar summary { cursor: pointer; font-weight: 600; color: var(--muted); padding: 8px 0; }
+  .linha-interruptor { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .linha-interruptor > div { display: grid; gap: 4px; }
+  .interruptor { flex: 0 0 auto; width: 52px; height: 32px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); position: relative; transition: background .2s; }
+  .interruptor i { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 99px; background: var(--muted); transition: transform .2s, background .2s; }
+  .interruptor[aria-checked="true"] { background: var(--gold-fill); border-color: var(--gold-fill); }
+  .interruptor[aria-checked="true"] i { transform: translateX(20px); background: #fff; }
   .confirma { background: var(--bad-soft); border-radius: 14px; padding: 12px; display: grid; gap: 10px; }
 </style>

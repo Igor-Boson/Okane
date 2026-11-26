@@ -3,7 +3,7 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import { estado } from '../../dados/estado.svelte';
   import { periodoSemana, rotuloDia, segundaDaSemana } from '../../dominio/datas';
-  import { brl, brl0 } from '../../dominio/dinheiro';
+  import { brl, brl0, escondendo } from '../dinheiro';
   import { fala } from '../../dominio/falas';
   import { minutosDeTrabalho, textoTempoDeTrabalho } from '../../dominio/orcamento';
   import { imagemDoPet } from '../../dominio/pet';
@@ -86,7 +86,7 @@
       {:else}
         Contou em {rotuloDia(g.data, estado.hoje).toLowerCase()}, na semana de {periodoSemana(segundaDaSemana(g.data))}.
       {/if}
-      {#if minutos}<span class="linha">⏱️ ≈ {textoTempoDeTrabalho(minutos)} do teu trabalho.</span>{/if}
+      {#if minutos && !escondendo()}<span class="linha">⏱️ ≈ {textoTempoDeTrabalho(minutos)} do teu trabalho.</span>{/if}
     </div>
     <div class="fala"><img src={urlPet(imagem)} alt="" /><p>{frase}</p></div>
     {#if !cat.essencial && respondido === null}
