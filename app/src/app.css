@@ -25,7 +25,8 @@
   --f-body: "Figtree Variable", -apple-system, "Segoe UI", system-ui, sans-serif;
   --f-kana: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
   --topo: env(safe-area-inset-top, 0px);
-  --base: env(safe-area-inset-bottom, 0px);
+  /* espaço da barrinha do iPhone; tela.ts desconta quando o iOS já deixa a página mais curta */
+  --base: max(0px, calc(env(safe-area-inset-bottom, 0px) - var(--falta-tela, 0px)));
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -72,10 +73,9 @@ p { margin: 0; }
 .num { font-family: var(--f-display); font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------ casca */
-/* Presa nas bordas da tela (e não em height: 100%): no app instalado o iOS às vezes calcula a
-   altura sem a barra de status e sobrava uma faixa embaixo das abas. --altura-tela vem de tela.ts. */
+/* Presa nas bordas da área que o navegador dá pra página (ver tela.ts sobre o iPhone). */
 .casca {
-  position: fixed; top: 0; bottom: 0; left: 0; right: 0; height: var(--altura-tela, auto);
+  position: fixed; top: 0; bottom: 0; left: 0; right: 0;
   max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; background: var(--surface); overflow: hidden;
 }
 @media (min-width: 560px) {

@@ -10,6 +10,7 @@
   import { atalhosAprendidos, chaveAtalho } from '../dominio/sugestao';
   import type { Categoria } from '../dominio/tipos';
   import CampoDinheiro from './CampoDinheiro.svelte';
+  import { infoDaTela } from '../tela';
   import { ui } from './ui.svelte';
 
   let servidor = $state<Disponibilidade>('desconhecido');
@@ -287,6 +288,7 @@
       <div class="bloco">
         <h3>Sobre</h3>
         <p class="nota">Okane {__VERSAO__} · seus dados ficam neste aparelho e no backup cifrado. Ninguém mais lê.</p>
+        <p class="nota versao">Versão de {new Date(__COMPILADO__).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })} · {infoDaTela()}</p>
         {#if !confirmarApagar}
           <button class="btn perigo" type="button" onclick={() => (confirmarApagar = true)}>Apagar todos os dados deste aparelho</button>
         {:else}
@@ -339,5 +341,6 @@
   .interruptor i { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 99px; background: var(--muted); transition: transform .2s, background .2s; }
   .interruptor[aria-checked="true"] { background: var(--gold-fill); border-color: var(--gold-fill); }
   .interruptor[aria-checked="true"] i { transform: translateX(20px); background: #fff; }
+  .versao { font-size: 11px; opacity: .8; font-variant-numeric: tabular-nums; }
   .confirma { background: var(--bad-soft); border-radius: 14px; padding: 12px; display: grid; gap: 10px; }
 </style>

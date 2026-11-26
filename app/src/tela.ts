@@ -1,10 +1,14 @@
 /**
- * Altura da tela no app instalado (Tela de Início) do iPhone.
+ * Faixa embaixo das abas no app instalado do iPhone.
  *
- * Com a barra de status translúcida, algumas versões do iOS calculam a viewport mais curta que a
- * tela (sem a altura da barra de status, ~47 px). A casca, presa nas bordas, termina antes do fim
- * da tela e sobra uma faixa embaixo das abas. Aqui a gente mede: se a casca não chega no fim da
- * tela e a janela ocupa a tela inteira, força a altura pela tela (variável --altura-tela).
+ * Com a barra de status translúcida, algumas versões do iOS (26.x) desenham a página numa área
+ * mais curta que a tela: falta a altura da barra de status (~47 px) embaixo. Nada da página
+ * consegue pintar ali (testado no aparelho: até um elemento fixo com a altura da tela é cortado);
+ * a faixa só mostra a cor de fundo da página, que é a mesma da barra de abas (app.css).
+ *
+ * O que dá pra fazer: perceber que a página já termina acima da barrinha do iPhone e tirar o
+ * espaço extra que as abas reservam pra ela (--falta-tela desconta do --base). Assim as abas
+ * ficam na altura normal e a faixa vira só a continuação delas.
  */
 export function ajustarAlturaDaTela(): void {
   const nav = navigator as Navigator & { standalone?: boolean };
@@ -13,16 +17,20 @@ export function ajustarAlturaDaTela(): void {
   const raiz = document.documentElement;
 
   const medir = () => {
-    raiz.style.removeProperty('--altura-tela');
     const casca = document.querySelector<HTMLElement>('.casca');
     if (!casca) return;
     const deitado = innerWidth > innerHeight;
     const lado = [Math.min(screen.width, screen.height), Math.max(screen.width, screen.height)];
     const larguraTela = deitado ? lado[1] : lado[0];
     const alturaTela = deitado ? lado[0] : lado[1];
-    if (Math.abs(innerWidth - larguraTela) > 2) return; // janela menor que a tela (iPad dividido): não mexe
-    const falta = alturaTela - casca.getBoundingClientRect().bottom;
-    if (falta > 2 && falta <= 120) raiz.style.setProperty('--altura-tela', `${alturaTela}px`);
+    const fim = Math.min(casca.getBoundingClientRect().bottom, innerHeight);
+    const falta = alturaTela - fim;
+    // só no app em tela cheia (não no iPad dividido) e só pra uma faixa do tamanho da barra de status
+    if (Math.abs(innerWidth - larguraTela) <= 2 && falta >= 20 && falta <= 120) {
+      raiz.style.setProperty('--falta-tela', `${Math.round(falta)}px`);
+    } else {
+      raiz.style.removeProperty('--falta-tela');
+    }
   };
 
   medir();
@@ -32,4 +40,10 @@ export function ajustarAlturaDaTela(): void {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') medir();
   });
+}
+
+/** Números da tela pra diagnóstico (Ajustes → Sobre). */
+export function infoDaTela(): string {
+  const falta = getComputedStyle(document.documentElement).getPropertyValue('--falta-tela').trim();
+  return `tela ${screen.width}×${screen.height} · app ${innerWidth}×${innerHeight}${falta ? ` · ajuste ${falta}` : ''}`;
 }
