@@ -1,7 +1,7 @@
 <script lang="ts">
   import { estado, novoId } from '../dados/estado.svelte';
   import { mesCurtoAno, mesDe, nomeMes, somarMeses } from '../dominio/datas';
-  import { brl0 } from '../dominio/dinheiro';
+  import { brl0 } from './dinheiro';
   import { calcularSemana, contaDoMes, extrasDoMes, mediaSemanal, parcelasDoMes, reservaMensal } from '../dominio/orcamento';
   import type { PlanoMes } from '../dominio/tipos';
   import CampoDinheiro from './CampoDinheiro.svelte';

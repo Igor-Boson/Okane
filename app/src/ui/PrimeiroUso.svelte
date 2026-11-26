@@ -7,7 +7,7 @@
   import { estado } from '../dados/estado.svelte';
   import { CATEGORIAS_PADRAO } from '../dominio/categorias';
   import { diaDoMes, diasNoMes, mesDe } from '../dominio/datas';
-  import { brl0 } from '../dominio/dinheiro';
+  import { brl0 } from './dinheiro';
   import { fala } from '../dominio/falas';
   import type { Tom } from '../dominio/tipos';
   import CampoDinheiro from './CampoDinheiro.svelte';

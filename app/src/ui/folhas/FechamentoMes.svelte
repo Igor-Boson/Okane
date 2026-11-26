@@ -3,7 +3,7 @@
   import { onDestroy, untrack } from 'svelte';
   import { estado } from '../../dados/estado.svelte';
   import { mesDe, nomeMes } from '../../dominio/datas';
-  import { brl0 } from '../../dominio/dinheiro';
+  import { brl0 } from '../dinheiro';
   import { fala } from '../../dominio/falas';
   import { resumoDoMes, sugerirMeta } from '../../dominio/orcamento';
   import { ui } from '../ui.svelte';

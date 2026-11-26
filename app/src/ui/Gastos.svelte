@@ -2,7 +2,7 @@
   import { urlPet } from './imagens';
   import { estado } from '../dados/estado.svelte';
   import { mesDe, nomeMes, periodoSemana, primeiroDia, rotuloDia, somarDias, somarMeses, ultimoDia } from '../dominio/datas';
-  import { brl, brl0 } from '../dominio/dinheiro';
+  import { brl, brl0 } from './dinheiro';
   import { fala } from '../dominio/falas';
   import { calcularSemana, gastosEntre, naoValeuDe, porCategoria, resumoDoMes, totalDe } from '../dominio/orcamento';
   import type { Gasto } from '../dominio/tipos';

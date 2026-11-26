@@ -1,6 +1,6 @@
 <script lang="ts">
   import { estado, novoId } from '../dados/estado.svelte';
-  import { brl, brl0 } from '../dominio/dinheiro';
+  import { brl, brl0 } from './dinheiro';
   import { fala } from '../dominio/falas';
   import CampoDinheiro from './CampoDinheiro.svelte';
   import { ui } from './ui.svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { estado } from '../../dados/estado.svelte';
   import { somarDias } from '../../dominio/datas';
-  import { brl } from '../../dominio/dinheiro';
+  import { brl } from '../dinheiro';
   import { registroAtual } from '../registrar';
   import { ui } from '../ui.svelte';
 

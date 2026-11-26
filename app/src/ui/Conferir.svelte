@@ -1,7 +1,7 @@
 <script lang="ts">
   import { estado } from '../dados/estado.svelte';
   import { rotuloDia } from '../dominio/datas';
-  import { brl } from '../dominio/dinheiro';
+  import { brl } from './dinheiro';
   import { chaveLancamento, conferir, lerExtrato, limparDescricao, type Lancamento } from '../dominio/extrato';
   import { categoriaPelaDescricao } from '../dominio/sugestao';
   import Pet from './Pet.svelte';
