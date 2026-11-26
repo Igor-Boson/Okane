@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
       },
     }),
   ],
-  define: { __VERSAO__: JSON.stringify(pacote.version), __PREVIA__: JSON.stringify(previa) },
+  define: { __VERSAO__: JSON.stringify(pacote.version), __COMPILADO__: JSON.stringify(new Date().toISOString()), __PREVIA__: JSON.stringify(previa) },
   build: { target: 'es2022', outDir: previa ? 'dist-previa' : 'dist' },
   test: {
     include: ['src/**/*.test.ts', 'server/**/*.test.ts'],

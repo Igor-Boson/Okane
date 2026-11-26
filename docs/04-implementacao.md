@@ -70,7 +70,8 @@ Coisas que os documentos não cobriam e que tive que decidir pra implementar:
 | I10 | **Backup:** espera 10 s depois de uma mudança (ou o app ir pro fundo); guarda o último + 1 cópia por dia por 8 dias | Pouca gravação, dá pra voltar uns dias |
 | I11 | **Nível 1** já no começo; sobe a cada 7 dias registrados | PET-R4 |
 | I12 | **Fixo que não é todo mês** (a cada 2, 3, 6 ou 12 meses): você põe o valor real (ex.: R$ 500) e o plano reserva o valor ÷ N todo mês (R$ 250) | A semana não oscila: o mês do pagamento não aperta e o mês sem pagamento não sobra dinheiro "de mentira". Na conferência com o extrato, o débito de R$ 500 cai em "prováveis fixos" |
-| I13 | **Altura da tela no iPhone:** a casca fica presa nas bordas da tela; se o iOS calcular a viewport sem a barra de status, o app mede e usa a altura da tela. O teclado encolhe as teclas (54 → 40 px) em tela baixa | Sobrava uma faixa embaixo das abas e a última linha do teclado ficava escondida |
+| I13 | **Faixa embaixo das abas no iPhone:** algumas versões do iOS desenham o app instalado 47 px mais curto que a tela (nada da página pinta ali). O app percebe e tira das abas o espaço da barrinha do iPhone, que já ficou pra fora; a faixa tem a mesma cor das abas. O teclado encolhe as teclas (54 → 40 px) em tela baixa | Sobrava uma faixa de outra cor e a última linha do teclado ficava escondida. Ajustes → Sobre mostra os números da tela pra diagnóstico |
+| I14 | **Atualização:** se a versão nova chega logo depois de abrir (ou voltar pro app) e você ainda não tocou em nada, o app recarrega na hora; senão aparece "Tem versão nova · Atualizar" e ela entra quando o app vai pro fundo. Ajustes → Sobre mostra a data da versão | Antes só entrava quando o app ia pro fundo, e no iPhone isso podia levar horas |
 
 ---
 
